@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/form_purchase_request"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Add required *-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/form_type_view"
+            android:text="Form Type:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"/>
+
+        <Spinner
+            android:id="@+id/type_spinner"
+            android:entries="@array/type_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_spinner"
+            android:layout_toEndOf="@id/form_type_view"
+            android:layout_alignBaseline="@id/form_type_view"
+            android:layout_alignBottom="@id/form_type_view"/>
+
+        <TextView
+            android:id="@+id/name_view"
+            android:text="Name:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/form_type_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_toEndOf="@id/name_view"
+            android:layout_alignBaseline="@id/name_view"
+            android:layout_alignBottom="@id/name_view"/>
+
+        <TextView
+            android:id="@+id/email_view"
+            android:text="Email Address:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"/>
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/email_view"
+            android:layout_alignBaseline="@id/email_view"
+            android:layout_alignBottom="@id/email_view"/>
+
+        <TextView
+            android:id="@+id/phone_view"
+            android:text="Phone Number:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"/>
+
+        <TextView
+            android:id="@+id/no_paren_view"
+            android:text="No parentheses - ( )"
+            android:textColor="@color/DarkBlue"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:imeOptions="actionDone"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_toEndOf="@id/phone_view"
+            android:layout_alignBaseline="@id/phone_view"
+            android:layout_alignBottom="@id/phone_view"/>
+
+        <TextView
+            android:id="@+id/status_view"
+            android:text="Status:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"/>
+
+        <Spinner
+            android:id="@+id/status_spinner"
+            android:entries="@array/status_list_2"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextPhone"
+            android:layout_toEndOf="@id/status_view"
+            android:layout_alignBaseline="@id/status_view"
+            android:layout_alignBottom="@id/status_view"/>
+
+        <TextView
+            android:id="@+id/requesting_view"
+            android:text="Requesting:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"/>
+
+        <Spinner
+            android:id="@+id/requesting_spinner"
+            android:entries="@array/bmo"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/requesting_view"
+            android:layout_alignBaseline="@id/requesting_view"
+            android:layout_alignBottom="@id/requesting_view"/>
+
+        <TextView
+            android:id="@+id/author_view"
+            android:text="Author(s):"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/requesting_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"/>
+
+        <EditText
+            android:id="@+id/editTextAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/author_view"
+            android:layout_alignBaseline="@id/author_view"
+            android:layout_alignBottom="@id/author_view"/>
+
+        <TextView
+            android:id="@+id/title_view"
+            android:text="Title:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/title_view"
+            android:layout_alignBaseline="@id/title_view"
+            android:layout_alignBottom="@id/title_view"/>
+
+        <TextView
+            android:id="@+id/ISBN_view"
+            android:text="ISBN:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/editTextISBN"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/ISBN_view"
+            android:layout_alignBaseline="@id/ISBN_view"
+            android:layout_alignBottom="@id/ISBN_view"/>
+
+        <TextView
+            android:id="@+id/edition_view"
+            android:text="Edition:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/editTextISBN"
+            android:layout_alignBaseline="@id/ISBN_view"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextEdition"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/edition_view"
+            android:layout_alignBaseline="@id/edition_view"
+            android:layout_alignBottom="@id/edition_view"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/publisher_view"
+            android:text="Publisher:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ISBN_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/editTextPublisher"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/publisher_view"
+            android:layout_alignBaseline="@id/publisher_view"
+            android:layout_alignBottom="@id/publisher_view"/>
+
+        <TextView
+            android:id="@+id/year_view"
+            android:text="Year:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/editTextPublisher"
+            android:layout_alignBaseline="@id/publisher_view"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextYear"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/year_view"
+            android:layout_alignBaseline="@id/year_view"
+            android:layout_alignBottom="@id/year_view"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/price_view"
+            android:text="Price:"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/publisher_view"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextPrice"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/price_view"
+            android:layout_alignBaseline="@id/price_view"
+            android:layout_alignBottom="@id/price_view" />
+
+        <TextView
+            android:id="@+id/prompt_view"
+            android:text="Additional Comments:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/price_view"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="32dp" />
+
+        <EditText
+            android:id="@+id/editTextArea"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:inputType="textMultiLine"
+            android:imeOptions="actionDone"
+            android:ems="10"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/prompt_view" />
+
+        <Button
+            android:id="@+id/form_button"
+            android:text="Submit Form"
+            android:textColor="@color/DarkBlue"
+            android:textStyle="bold"
+            android:background="@drawable/button_contact"
+            android:layout_width="175dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/editTextArea"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"/>
+
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   
+    <string name="scholarly_title">How to identify a scholarly article</string>
+    <string name="scholarly_content">
+        <![CDATA[
+<p class="left">College instructors often require that students include only scholarly articles in the bibliographies of their research papers. But how can a student tell the difference between a scholarly publication and a popular one that\'s written for a general audience?
+</p>
+<p class="left">The criteria below will help you recognize a scholarly or research article. Not every one of these criteria will be found in every article, but when you can answer yes to many of the following questions, you can be quite confident that you\'ve found the kind of literature your instructor wants you to use.
+</p>
+<p class="left"><b>Looking at the Citation</b>
+</p>
+<p class="left">These criteria are most important when you are looking at a citation for an article in an index, a database, or a bibliography:
+</p>
+<div class="blockquote">
+<div class="blockquote">
+
+<ul>
+<li><p class="left">Does the periodical title depict a very specific subject area?
+</p> </li>
+<li><p class="left">Does the article have a complex and lengthy title?
+</p> </li>
+<li><p class="left">Are the authors\' names listed along with their degrees, titles, or other credentials and/or the names of the institutions with which they are affiliated (particularly colleges or universities)?
+</p> </li>
+<li><p class="left">Was the article cited in a subject-specific index or database (e.g., <i>Education Index, Medline, Sociological Abstracts</i>)?
+</p> </li>
+<li><p class="left">Does the periodical title contain the words Journal, Studies, Research, or Review?
+</p> </li>
+<li><p class="left">Is the article long - more than 5 pages?
+</p> </li>
+</ul>
+
+<p class="left">&nbsp;
+</p>
+</div>
+</div>
+<p class="left"><b>Looking at the Article On-Line</b> (all of the above, plus:)
+</p>
+<p class="left">These criteria will be most helpful when you\'re looking at a full-text article on-line:
+</p>
+<div class="blockquote">
+<div class="blockquote">
+
+<ul>
+<li><p class="left">Does the article use technical language and specialized vocabulary? Does it assume some subject knowledge on the part of the reader? Is it complex &amp;not easily comprehended by a general reader?
+</p> </li>
+<li><p class="left">Does the article include footnotes, a bibliography, or list of references?
+</p> </li>
+<li><p class="left">Is the text accompanied by tables &amp;charts, but not many photos or drawings? (unless the field is visually-oriented, such as art, design, or architecture)
+</p> </li>
+<li><p class="left">Does the article report on the results of research or experiments?
+</p> </li>
+<li><p class="left">Does the article include a review of the literature, i.e., a summary of other articles written on the topic?
+</p> </li>
+<li><p class="left">Does an abstract or summary of the article appear before the article itself begins?
+</p> </li>
+</ul>
+
+<p class="left">&nbsp;
+</p>
+</div>
+</div>
+<p class="left"><b>Looking at the Actual Article in a Periodical </b>(all of the above, plus:)
+</p>
+<p class="left">These criteria can be used when you have the actual publication in hand:
+</p>
+<div class="blockquote">
+<div class="blockquote">
+
+<ul>
+<li><p class="left">Is the periodical published or sponsored by a scholarly society or organization? (e.g., American Psychological Association, Modern Language Association)
+</p> </li>
+<li><p class="left">Does the publication list an editorial board near the front of each issue?
+</p> </li>
+<li><p class="left">Does the publication have a serious look, with few design or graphic elements? Does it have a limited number of color photographs or illustrations?
+</p> </li>
+<li><p class="left">Does the periodical contain almost no advertising? Are the ads for journals, professional organizations or other non-commercial products?
+</p> </li>
+<li><p class="left">Is the periodical published monthly or less frequently?
+</p> </li>
+</ul>
+
+</div>
+</div>
+<p class="center">&nbsp;
+</p>
+<p class="left"><b>POPULAR LITERATURE<i> &quot;GIVEAWAYS&quot;</i></b>
+</p>
+<p class="left">There are also a few characteristics that almost always indicate that the article or periodical you have is NOT scholarly, but is a general-interest publication. Answering yes to many of the following questions should raise a red flag in your evaluation.
+</p>
+<div class="blockquote">
+<div class="blockquote">
+<p class="left"><B>Are authors\' names missing?</B>
+</p>
+<p class="left"><B>Are there very few, very brief, or no bibliographies?</B>
+</p>
+<p class="left"><B>Are there lots of full-color ads for popular commercial products?</B>
+</p>
+</div>
+<div class="blockquote">
+<p class="left"><B>Is the language very easy to understand?</B>
+</p>
+<p class="left"><B>Is the periodical published frequently:daily or weekly?</B>
+</p>
+<p class="left"><B>Does the periodical contain lots of graphics, photos, &amp;color?</B>
+</p>
+<p class="left"><B>Would the article appeal to a broad range of people?</B>
+</p>
+<p class="left"><B>Can the periodical be purchased at newsstands or stores?</B>
+</p>
+<p class="left">&nbsp;
+</p>
+</div>
+</div>
+<p class="left"><b>THE GRAY AREAS<i> (there always are some!)</i></b>
+</p>
+<p class="left">As mentioned above, not every scholarly criterion will be present in every scholarly article. A popular article may meet a few of the scholarly criteria. Occasionally, a scholarly article will be published in a popular magazine. In addition, for some topics or disciplines, popular magazines such as <i>Time</i> or <i>Sports Illustrated</i> may be appropriate. If you are uncertain about whether an article is acceptable to your instructor or not, the best approach is to <I>ask</I>!
+</p>
+        ]]>
+    </string>
+    <string name="reserves_title">Library Reserves</string>
+    <string name="reserves_content">
+        <![CDATA[
+      <h3>For Students</h3>
+
+<p><b>Electronic Reserve</b> is a section of Blackboard where instructors have materials such as articles and book chapters uploaded for their classes. Not all instructors use Electronic Reserve. Be aware that course materials may also be located in the <i>Course Documents</i> section for your class on Blackboard.</p>
+
+<p><b>To find e-reserves in Blackboard</b>: After signing in to Blackboard, click on:</p>
+
+<ol>
+ <li>My Courses</li>
+ <li>&quot;eReserve&quot; tab on the left side menu within a course</li>
+ <li>Folders will be listed</li>
+</ol>
+
+<center>
+<h3><big><b><a href="https://blackboard.newpaltz.edu/" style="text-decoration: underline;">Blackboard home of course sharing pages &amp; Library eReserves </a></b></big></h3>
+</center>
+
+<p>If your instructor has placed books and materials on Physical Reserve, your course folder will also contain a link to the list of holdings in our catalog.</p>
+
+<p><b>Print and Other Physical Course Materials</b></p>
+
+<p>Physical Reserve is a collection of items set aside for classes with special lending privileges. Materials such as DVDs, textbooks, and supplemental materials are placed into this collection by instructors for their students.</p>
+
+<p>To use an item on Physical Reserve, provide staff at the desk with the instructor&#39;s name and the title of the item. <b>You need a valid student ID to check out reserve materials or any other library materials.</b></p>
+
+<p>Consult the <a href="http://new.sunyconnect.suny.edu:4430/F/?func=scan&amp;local_base=NEW30&amp;scan_code=CNO-4&amp;scan_start=a" title="Reserves"><b>Library Reserves Catalog </b></a> for the availability of items on Reserve.</p>
+<br />
+&nbsp;
+ </div>
+
+  ]]>
+    </string>
+    <string name="print_reserves_title">Print/Media Course Reserves</string>
+    <string name="print_reserves_content">
+        <![CDATA[
+        <b>Course Reserves</b> allows instructors to put class materials in a separate collection for short term loans. Any type of material may be placed on Course Reserves including required and supplemental materials.
+
+<h3>Place Items on Reserve</h3>
+
+<ul>
+ <li>Download and print out a <a href="/Eres/RESERVE_LIST.docx">Print/Media Course Reserves Form</a>. Please fill out all fields specified on the form.</li>
+ <li>Bring items for Course Reserves to the Circulation Department along with the completed forms. Unfortunately, we cannot accept Reserves Forms via email.</li>
+ <li>Items are processed in the order they are received. To expedite processing, please submit your reserve items two weeks before the start of classes.</li>
+</ul>
+
+<h3>Policies</h3>
+
+<ul>
+ <li>Personal items may be placed on Course Reserves, however the faculty member must assume all liability for loss or damage to these items. Please be aware that personal items will be marked with stickers and tape.</li>
+ <li>Books and media checked out from other libraries cannot be placed on Course Reserves. This includes Netflix, Redbox, Interlibrary loan books, etc.</li>
+ <li>If a Faculty member needs access to an item on Course Reserves for another course, a <a href="/contentfiles/userfiles/files/Permission_form.pdf">Permission Form</a>&nbsp;is required.</li>
+ <li>DVDs and CDs must be in a <i><b>case</b></i>. Paper sleeves are not accepted.</li>
+ <li>With the exception of Teaching Assistants who have been granted explicit written permission, no third party may submit forms or materials for Course Reserves.</li>
+</ul>
+&nbsp;
+
+<h3>Course Reserves Removal Policies</h3>
+
+<p>At the end of the Spring semester all items are removed and personal items returned via campus mail. If you would like to pick up your items, please do so BEFORE the end of the semester. The library is not responsible for items lost or damaged in the mail. To renew Fall Course Reserves for the Spring, please notify Circulation staff prior to the end of the Fall semester. Unfortunately, we cannot renew Spring Course Reserves for the following Fall.</p>
+
+<h3>Item Purchase Request</h3>
+
+<p>If the library does not own a book or item you need for Course Reserves, please submit an <a href="/purchaseform.php">Online Book Request Form</a>. It may be possible for the library to purchase the materials (note: please confirm that you have an <a href="http://new.sunyconnect.suny.edu:4430/F/?func=BOR-INFO">active library account</a> before submitting your request). Be aware that the library does not generally purchase textbooks.</p>
+
+<h3>Contact Us</h3>
+
+<p>Checkout Desk: (845) 257-3714<br />
+Cathy Cooper,&nbsp;Course Reserves Clerk: cooperc2@newpaltz.edu
+        ]]>
+    </string>
+
+    <string name="electronic_reserves_title">Electronic Reserves</string>
+    <string name="electronic_reserves_content">
+        <![CDATA[
+        <p><b>Electronic Reserve</b> is a service offered to instructors to upload their course reading material and documents to <a href="https://blackboard.newpaltz.edu">Blackboard</a>. Content is uploaded to course folders located in the eReserves section of Blackboard, materials are only visible to students enrolled in those courses.</p>
+
+<h3><i>How to submit materials for eReserves:</i></h3>
+
+<p>&nbsp;</p>
+
+<h3 id="forms-title">Forms</h3>
+
+<div id="forms">
+<ol type="1">
+ <li>Instructors are required to fill out a <a href="/Eres/facultyinformation.pdf">course card</a> for each course.</li>
+ <li>Each submission whether they are an <a href="/Eres/journal2.pdf">article</a> or a <a href="/Eres/bookreserves.pdf">book chapter</a> must be accompanied by a cover page.</li>
+</ol>
+
+<p>To process your eReserves submissions quickly all forms must be complete. Any incomplete forms will delay the submission until the instructor provides staff with all missing information.</p>
+</div>
+
+<h3 id="limitations-title">Limitations</h3>
+
+<div id="limitations">
+<p>In compliance with the <a href="/policies/copyright.html">Copyright fair use guidelines </a> the following materials can be placed on electronic reserves:</p>
+
+<ul>
+ <li>One article from a journal per class per semester</li>
+ <li>Up to 10% or 2 chapters of a book&#39;s contents per class per semester whichever is less.</li>
+</ul>
+</div>
+
+<h3 id="printed-title">Submission Guidelines for Printed Copies</h3>
+
+<p><i>Mail:</i> Instructors may submit forms and copies of articles and book chapters via campus mail.</p>
+
+<p><i>Library - Checkout Desk:</i> Forms and printed copies may be submitted at the Checkout Desk. No third party, including Teaching Assistants, may submit forms or materials for eReserves. Instructors must be present at the time of submission and to make any changes.</p>
+
+<p><b>Hand written forms must be in ink, pencil does not scan properly and will not be accepted.</b></p>
+
+<p>All items/articles will be returned to faculty via the campus mail as soon as scanning is completed.</p>
+
+<p>Please allow at least ONE week for new items/articles to be scanned and to appear on the Blackboard course page.</p>
+</div>
+
+<h3 id="electronic-title">Electronic Submission Guidelines</h3>
+
+<div id="electronic">
+<p>Currently we are only accepting eReserves submissions via email.</p>
+
+<p>Send completed forms and materials to <a href="mailto:eres@library.newpaltz.edu">eres@library.newpaltz.edu</a>.</p>
+
+<p><b>Please don&#39;t forget to include a cover page form for each article/book chapter submission.</b></p>
+
+<p>If you would like to upload digital content to Blackboard yourself, documentation may be found on Blackboard under &quot;Teaching Faculty---Documents&quot;.</p>
+</div>
+
+
+<h3 id="transferring-title">Transferring eReserves to another Course</h3>
+
+<div id="transferring">
+<p>All articles/items are archived and can be transferred from one course to another. If you want archived items transferred to another course, simply list the items on a reserves course card. Items will be retrieved from the original course archive and placed on the Blackboard course page.</p>
+</div>
+
+<h3 id="newsemester-title">Transferring eReserves to a New Semester</h3>
+
+<div id="newsemester">
+<p>At the end of every semester all articles/items are archived. If you want archived items available to your students for another semester, you can submit a new course card with the updated information. Instructors may also update old handwritten course cards and inform Circulation staff of any changes they would like to make.</p>
+</div>
+=======
+<p class="indent" style="text-align: center;"><strong><a href="http://acs.newpaltz.edu/np-hawks-wpa-wireless-network/" target="_blank"><u>Connecting to the Wireless</u></a></strong></p>
+<img alt="surfing around the globe" class="center" height="48" src="/images/webicons/webbrowse__48x48.gif" width="48"><br>
+<br>
+
+&nbsp;
+
+<h3>Contact - <i>Need help?</i></h3>
+
+<h3 class="center"><br />
+E-mail- <a href="mailto:eres@library.newpaltz.edu">eres@library.newpaltz.edu</a><br />
+Phone: 257-3716</h3>
+
+ </div>
+]]>
+    </string>
+</resources>

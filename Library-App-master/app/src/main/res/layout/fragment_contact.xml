@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White" >
+
+    <Button
+        android:id="@+id/text_librarian"
+        android:background="@drawable/button_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/text_librarian"
+        android:textStyle="bold"
+        android:textColor="@color/DarkBlue"
+        android:onClick="sendSMS"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/chat_librarian"
+        android:background="@drawable/button_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/chat_librarian"
+        android:textStyle="bold"
+        android:textColor="@color/DarkBlue"
+        android:onClick="openWebChat"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text_librarian" />
+
+    <TextView
+        android:id="@+id/numbers_header"
+        android:text="DEPARTMENT PHONE NUMBERS"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/DarkBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/chat_librarian"/>
+
+    <TextView
+        android:id="@+id/circulation_num"
+        android:text="Circulation Desk:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="55dp"
+        android:layout_below="@id/numbers_header"/>
+
+    <Button
+        android:id="@+id/circulation_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3714"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/circulation_num"
+        android:layout_alignBottom="@id/circulation_num" />
+
+    <TextView
+        android:id="@+id/collection_num"
+        android:text="Collections Dept:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/circulation_num"/>
+
+    <Button
+        android:id="@+id/collection_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3731"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/collection_num"
+        android:layout_alignBottom="@id/collection_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+    <TextView
+        android:id="@+id/director_num"
+        android:text="Director's Office:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/collection_num"/>
+
+    <Button
+        android:id="@+id/director_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3719"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/director_num"
+        android:layout_alignBottom="@id/director_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+    <TextView
+        android:id="@+id/ill_num"
+        android:text="Interlibrary Loans:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/director_num"/>
+
+    <Button
+        android:id="@+id/ill_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3680"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/ill_num"
+        android:layout_alignBottom="@id/ill_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+    <TextView
+        android:id="@+id/information_num"
+        android:text="Information / Hours:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/ill_num"/>
+
+    <Button
+        android:id="@+id/information_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3700"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/information_num"
+        android:layout_alignBottom="@id/information_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+    <TextView
+        android:id="@+id/instruction_num"
+        android:text="Library Instruction:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/information_num"/>
+
+    <Button
+        android:id="@+id/instruction_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3706"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/instruction_num"
+        android:layout_alignBottom="@id/instruction_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+    <TextView
+        android:id="@+id/records_num"
+        android:text="Records Dept:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/instruction_num"/>
+
+    <Button
+        android:id="@+id/records_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3662"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/records_num"
+        android:layout_alignBottom="@id/records_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+    <TextView
+        android:id="@+id/research_num"
+        android:text="Research Desk:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/records_num"/>
+
+    <Button
+        android:id="@+id/research_button"
+        android:background="@drawable/button_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="845 257-3710"
+        android:textSize="18dp"
+        android:textColor="@color/DarkBlue"
+        android:onClick="dialNum"
+        android:layout_toRightOf="@id/research_num"
+        android:layout_alignBottom="@id/research_num"
+        android:layout_alignStart="@id/circulation_button" />
+
+</RelativeLayout>
