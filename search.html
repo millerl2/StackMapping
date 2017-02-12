@@ -1,0 +1,40 @@
+<!--This simple form writes the whole URL of the search. Remove document.write(absURL) 
+in the capture() script if you want to get redirected to the search results instead-->
+
+<DOCTYPE html>
+<html lang = "en">
+
+<head>
+	<title> Search Catalog </title>
+</head>
+
+<body>
+	
+     <form id="searchForm" action="http://new.sunyconnect.suny.edu:4430/F" method="get" onSubmit="capture()"> 
+        <input id="func" type="hidden"  name="func" value="find-b">
+      <b> Search Type:</b>
+       <select id="find_code" name="find_code" style="width:210px">
+         <option value="WRD">Word(s) Anywhere</option> 
+         <option value="WTT">Title Word(s)</option> 
+         <option value="WAU">Author Word(s)</option> 
+         <option value="WSU">Subject Word(s)</option>  
+         <option value="WSE">Series Title Word(s)</option> 
+       </select> 
+      <b>for: </b>
+        <input type="text" id="request" name="request" size="26">
+        <input type="submit" value="Go!"/>
+    </form>    
+    
+    <script>
+        function capture()
+        {
+			// the following parses the URL present in the HTML seach form
+            var absURL=document.getElementById("searchForm").action+"?"+document.getElementById("func").name+"="+document.getElementById("func").value+"&"+document.getElementById("find_code").name+"="+document.getElementById("find_code").options[document.getElementById("find_code").selectedIndex].value+"&"+document.getElementById("request").name+"="+document.getElementById("request").value;
+
+            document.write(absURL);
+        }
+    </script>
+    
+</body>
+</html>
+
