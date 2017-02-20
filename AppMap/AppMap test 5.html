@@ -16,11 +16,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css" media="all">
-        #search {
-            margin: 15 auto;
-            display: none;
-        }
-
+        
         #about {
             margin: 15 auto;
             display: none;
@@ -40,6 +36,10 @@
             margin: 0 auto;
             display: none;
         }
+        #search{
+        	margin: 0 auto;
+        	display: none;
+        }
         
         .info_panel {
             background-color: rgba(255, 255, 255, .8);
@@ -57,7 +57,7 @@
             padding: 10%;
         }
         
-        .search {
+        .bodydiv {
             padding: 20px;
         }
         /* navbar */
@@ -131,9 +131,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-						<a href="#" onclick="showSearch();">Search</a>
-		    		</li>
 		    		<li>
                         <a href="#" onclick="showAbout();">About</a>
                     </li>
@@ -146,6 +143,9 @@
                     <li>
                         <a href="#" onclick="showGround();">Ground Floor</a>
                     </li>
+                    <li>
+                    	<a href="#" onclick="showSearch();">Search</a>
+                    	</li>
                     
                 </ul>
             </div>
@@ -1059,7 +1059,6 @@
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "block";
-            document.getElementById("search".style.display="block");
         }
 
         function showMain() {
@@ -1067,7 +1066,7 @@
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "none";
-            document.getElementById("search".style.display="block");
+            
         }
 
         function showGround() {
@@ -1075,7 +1074,7 @@
             document.getElementById("mainfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "none";
-            document.getElementById("search".style.display="block");
+            
 
         }
 
@@ -1084,19 +1083,16 @@
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "block";
             document.getElementById("about").style.display = "none";
-            document.getElementById("search".style.display="block");
+            
 
         }
 
         function showSearch()
         {
-        	document.getElementById("mainfloormap").style.display = "none";
-            document.getElementById("groundfloormap").style.display = "none";
-            document.getElementById("concoursemap").style.display = "none";
-            document.getElementById("about").style.display = "none";
-            document.getElementById("search").style.display="block";
-        
+        	document.getElementById("search").style.display="block";
         }
+
+        
 
          function color() {
             console.log("started coloring shelves");
@@ -1150,6 +1146,7 @@
          	<input type="submit" value="Search"/>
 
         </form>
+
 
         <h3> Search Libray stacks with Call Number:</h3>
         <label for="callno">Call Number:</label>

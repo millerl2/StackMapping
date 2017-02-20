@@ -16,11 +16,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css" media="all">
-        #search {
-            margin: 15 auto;
-            display: none;
-        }
-
+        
         #about {
             margin: 15 auto;
             display: none;
@@ -57,7 +53,7 @@
             padding: 10%;
         }
         
-        .search {
+        .bodydiv {
             padding: 20px;
         }
         /* navbar */
@@ -131,9 +127,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-						<a href="#" onclick="showSearch();">Search</a>
-		    		</li>
 		    		<li>
                         <a href="#" onclick="showAbout();">About</a>
                     </li>
@@ -1059,7 +1052,6 @@
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "block";
-            document.getElementById("search".style.display="block");
         }
 
         function showMain() {
@@ -1067,7 +1059,7 @@
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "none";
-            document.getElementById("search".style.display="block");
+            
         }
 
         function showGround() {
@@ -1075,7 +1067,7 @@
             document.getElementById("mainfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "none";
-            document.getElementById("search".style.display="block");
+            
 
         }
 
@@ -1084,19 +1076,11 @@
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "block";
             document.getElementById("about").style.display = "none";
-            document.getElementById("search".style.display="block");
+            
 
         }
 
-        function showSearch()
-        {
-        	document.getElementById("mainfloormap").style.display = "none";
-            document.getElementById("groundfloormap").style.display = "none";
-            document.getElementById("concoursemap").style.display = "none";
-            document.getElementById("about").style.display = "none";
-            document.getElementById("search").style.display="block";
         
-        }
 
          function color() {
             console.log("started coloring shelves");
@@ -1149,12 +1133,37 @@
          	<input type="text" id="request" name="request" size="26">
          	<input type="submit" value="Search"/>
 
+         	<?php
+				$url = 'http://library.newpaltz.edu/xaleph/?sys=000651842';
+				$lines = file($url);
+				$search = 'callno';
+				$found = "";
+				foreach ($lines as $line) {
+   					if(strpos($line,$search) !== false)
+   					$found = $line;
+				}
+				//echo $found;
+				$myArray = explode(':', $found);
+				$myArray = str_replace('"', "", $myArray);
+				$myArray=str_replace(',', "", $myArray);
+				print_r($myArray[1]);
+			?>
+
+
+         	<input type="text" id="hiddenInputField" value=$myArray[1]>
+         	<button id="submit2" onclick="getText()">Search</button>
+
         </form>
+
 
         <h3> Search Libray stacks with Call Number:</h3>
         <label for="callno">Call Number:</label>
 		<input type="text" id="textbox1" name="textbox1" size="26"/>
         <button id="submit" onclick="getText()">Submit</button>
+
+        <form action="getcallno.php">
+        	<input type="submit" value="click here">
+        	</form>
 
     </div>
     
