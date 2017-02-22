@@ -22,6 +22,4 @@
     
     $searchresults = scrape_page($url);
     echo $searchresults;
-    
-  
 ?>
