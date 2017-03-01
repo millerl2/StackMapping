@@ -16,7 +16,10 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css" media="all">
-        
+        #search {
+            margin: 15 auto;
+            display: none;
+        }
         #about {
             margin: 15 auto;
             display: none;
@@ -126,6 +129,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>
+						<a href="#" onclick="showSearch();">Search</a>
+		    		</li>
+		    		
+		    		
 		    		<li>
                         <a href="#" onclick="showAbout();">About</a>
                     </li>
@@ -1061,7 +1069,15 @@
             document.getElementById("about").style.display = "none";
             document.getElementById("")
         }
-       
+        function showSearch()
+        {
+        	document.getElementById("search").style.display="block";
+        	document.getElementById("mainfloormap").style.display = "none";
+            document.getElementById("groundfloormap").style.display = "none";
+            document.getElementById("concoursemap").style.display = "none";
+            document.getElementById("about").style.display = "none";
+        
+        }
          function color() {
             console.log("started coloring shelves");
             var shelvesToColor = document.getElementsByClassName("st3");
@@ -1094,10 +1110,9 @@
         </p>
     </div>
     <div id="search">
+    	
     	<h3> Search Catalogue: </h3>
-
     	<form id="searchForm" action="search.php" method="get"> 
-
         	<input id="func" type="hidden"  name="func" value="find-b">
       			<b> Search Type:</b>
        		<select id="find_code" name="find_code" style="width:210px">
@@ -1109,7 +1124,9 @@
        		</select> 
       		<b>for: </b>
          	<input type="text" id="request" name="request" size="26">
-         	<input type="submit" value="Search"/>
+         	<input type="hidden" id="filtercode" name="filter_code_5" value="WCL"> <!--search specific collection-->
+         	<input type="hidden" id="filterrequest" name="filter_request_5" value="STACK"> <!--only searches stacks-->
+          	<input type="submit" value="Search"/>
 			<?php include "include/search.php"; ?>
         </form>
 
@@ -1119,5 +1136,6 @@
         <button id="submit" onclick="getText()">Submit</button>
 
     </div>
-    
 </body>
+
+</html>
