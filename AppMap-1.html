@@ -21,7 +21,6 @@
             margin: 15 auto;
             display: none;
         }
-
         #mainfloormap {
             margin: 0 auto;
             display: block;
@@ -166,6 +165,32 @@
 		  </div>
 		</div>
 <!--SVG div container-->
+	<div id="search">
+    	<h3> Search Catalogue: </h3>
+
+    	<form id="searchForm" action="http://new.sunyconnect.suny.edu:4430/F" method="get"> 
+
+        	<input id="func" type="hidden"  name="func" value="find-b">
+      			<b> Search Type:</b>
+       		<select id="find_code" name="find_code" style="width:210px">
+         		<option value="WRD">Word(s) Anywhere</option> 
+         		<option value="WTT">Title Word(s)</option> 
+         		<option value="WAU">Author Word(s)</option> 
+         		<option value="WSU">Subject Word(s)</option>  
+         		<option value="WSE">Series Title Word(s)</option> 
+       		</select> 
+      		<b>for: </b>
+         	<input type="text" id="request" name="request" size="26">
+         	<input type="submit" value="Search"/>
+			<?php include "include/search.php"; ?>
+        </form>
+
+        <h3> Search Libray stacks with Call Number:</h3>
+        <label for="callno">Call Number:</label>
+		<input type="text" id="textbox1" size="26"/>
+        <button id="submit" onclick="getText()">Submit</button>
+
+    </div>
     <div class="bodydiv">
         <!--Main floor SVG-->
         <svg id="mainfloormap" version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 720 873" style="enable-background:new 0 0 720 873;" xml:space="preserve">
@@ -605,7 +630,6 @@
 	.st0{fill:#CAD08F;}
 	.st1{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st2{fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-
 	.st4{fill:none;}
 	.st5{font-family:'Helvetica-Light';}
 	.st6{font-size:50px;}
@@ -852,22 +876,17 @@
         			getText();
         	}
         }
-
         function getText() {
             //read text from URL
             var request = new XMLHttpRequest();
             request.open('GET', 'ShelfListSheet1.csv');
-
             request.onreadystatechange = function() {
                 if (this.readyState == this.DONE) {
                     console.log("state change");
                     var rawData = request.responseText;
-
                     //Normalize data
                     rawData = rawData.toUpperCase(); 
                     rawData = rawData.replace(' ','')
-
-
                     console.log("started");
                     //Array of shelfs, [i][0] = start call number, [i][1] = end call number, [i][2] = floor, [i][3] = shelf number
                     var items = [
@@ -985,7 +1004,6 @@
                                     index = shelves[i].floor + "-" + shelves[i].mapnumber;
                                 }
                             }
-
                         }
                         //If contained within end section
                         else if ((callno.section + callno.subsection) == (shelves[i].section2 + shelves[i].subsection2)) {
@@ -1036,52 +1054,40 @@
                      	document.getElementById("modalParagraph").innerHTML = "Your book was found on shelf " + index.split('-')[1] + " on " + indexFloor;                   	
                     	document.getElementById("modalButton").click();
                     }
-
                     
                     $('#bookFoundModal').on('show.bs.modal', function(e) {
     					
 					});                 
                 }
             }
-
             request.send();
         }
-
         function showAbout() {
             document.getElementById("mainfloormap").style.display = "none";
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "block";
         }
-
         function showMain() {
             document.getElementById("mainfloormap").style.display = "block";
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "none";
-            
         }
-
         function showGround() {
             document.getElementById("groundfloormap").style.display = "block";
             document.getElementById("mainfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "none";
             document.getElementById("about").style.display = "none";
-            
-
         }
-
         function showConcourse() {
             document.getElementById("mainfloormap").style.display = "none";
             document.getElementById("groundfloormap").style.display = "none";
             document.getElementById("concoursemap").style.display = "block";
             document.getElementById("about").style.display = "none";
-            
-
+            document.getElementById("")
         }
-
-        
-
+       
          function color() {
             console.log("started coloring shelves");
             var shelvesToColor = document.getElementsByClassName("st3");
@@ -1092,30 +1098,7 @@
                 }
             }
         }
-
     </script>
-    <?php
-		if(isset($_GET['action'])){	
-			$url = 'http://library.newpaltz.edu/xaleph/?sys=000651842';
-			$lines = file($url);
-			$search = 'callno';
-			$found = "";
-			foreach ($lines as $line) {
-	   			if(strpos($line,$search) !== false)
-	   				found = $line;
-				}
-			//echo $found;
-			$myArray = explode(':', $found);
-			$myArray = str_replace('"', "", $myArray);
-			$myArray=str_replace(',', "", $myArray);
-			$data = $myArray[1];
-			print($data);
-		}
-	?>
-	<form id="scriptForm" method="post"  action="?action" >
-    <input type="submit" value="Submit" id="Click" />
-    </form>
-
     <div id="about">
         <p>
             <b> STL Library Call Number Locator Tool</b>
@@ -1131,41 +1114,10 @@
             Questions? Bugs? Contact me at <a href="mailto:giordana3@hawkmail.newpaltz.edu?Subject=Library Book Finder">giordana3@hawkmail.newpaltz.edu</a>
             <br>
             <br>
-           	Developed by Anthony Giordano, Brenden Wrafter, Darrell Maxwell, Lee Miller, Andrew Smith, Hui Li, Linna Chin for the Sojourner Truth Library at SUNY New Paltz Android/iOS app
+           	Developed by Anthony Giordano, Brenden Wrafter, Darrell Maxwell, Lee Miller, Andrew Smith, Hui Li, Linna Chen for the Sojourner Truth Library at SUNY New Paltz Android/iOS app
            	<br>
            	Graphics by Kelly McInerney
         </p>
     </div>
-
-    <div id="search">
-    	<h3> Search Catalogue: </h3>
-
-    	<form id="searchForm" action="http://new.sunyconnect.suny.edu:4430/F" method="get" onSubmit="capture()"> 
-
-        	<input id="func" type="hidden"  name="func" value="find-b">
-      			<b> Search Type:</b>
-       		<select id="find_code" name="find_code" style="width:210px">
-         		<option value="WRD">Word(s) Anywhere</option> 
-         		<option value="WTT">Title Word(s)</option> 
-         		<option value="WAU">Author Word(s)</option> 
-         		<option value="WSU">Subject Word(s)</option>  
-         		<option value="WSE">Series Title Word(s)</option> 
-       		</select> 
-      		<b>for: </b>
-         	<input type="text" id="request" name="request" size="26">
-         	<input type="submit" value="Search"/>
-
-        </form>
-
-
-        <h3> Search Libray stacks with Call Number:</h3>
-        <label for="callno">Call Number:</label>
-		<input type="text" id="textbox1" name="textbox1" size="26"/>
-        <button id="submit" onclick="getText()">Submit</button>
-
-
-    </div>
     
 </body>
-
-</html>

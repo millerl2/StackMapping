@@ -16,10 +16,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css" media="all">
-        #search {
-            margin: 15 auto;
-            display: none;
-        }
+        
         #about {
             margin: 15 auto;
             display: none;
@@ -129,9 +126,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-						<a href="#" onclick="showSearch();">Search</a>
-		    		</li>
 		    		<li>
                         <a href="#" onclick="showAbout();">About</a>
                     </li>
@@ -1067,15 +1061,7 @@
             document.getElementById("about").style.display = "none";
             document.getElementById("")
         }
-        function showSearch()
-        {
-        	document.getElementById("search").style.display="block";
-        	document.getElementById("mainfloormap").style.display = "none";
-            document.getElementById("groundfloormap").style.display = "none";
-            document.getElementById("concoursemap").style.display = "none";
-            document.getElementById("about").style.display = "none";
-        
-        }
+       
          function color() {
             console.log("started coloring shelves");
             var shelvesToColor = document.getElementsByClassName("st3");
