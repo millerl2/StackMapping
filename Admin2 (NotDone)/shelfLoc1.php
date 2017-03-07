@@ -44,7 +44,7 @@
 					echo "<td>" . $row->Length . "</td>";
 					echo "<td>" . $row->Width . "</td>";
 					echo "<td>" . $row->Map . "</td>";
-					echo "<td><a href = 'javascript:editForm(". $row->ShelfNo .")'>Edit</button></td>";
+					echo "<td><a href = 'javascript:editForm(". $row->ShelfNo .")'>Edit<a/></td>";
 					echo "<td><a href = 'javascript:confirmDelete(". $row->ShelfNo .")'>Delete</a></td></tr>";
 				}
 			}
