@@ -37,7 +37,7 @@
 		}
 		else
 		{
-			if ($stmt = $conn->prepare("UPDATE FeedBack SET ShelfNo = ?, Found = ?, Time = ? WHERE CallNo = $CallNo"))
+			if ($stmt = $conn->prepare("UPDATE FeedBack SET ShelfNo = ?, Found = ?, datetime = ? WHERE CallNo = $CallNo"))
 			{
 				$stmt->bind_param("sss",$ShelfNo,$Found,$Time);
 				$stmt->execute();

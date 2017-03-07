@@ -29,14 +29,14 @@
 		$Found = $conn->real_escape_string($_POST['Found']);
 		$Time = $conn->real_escape_string($_POST['Time']);
 		//check that all fields are filled
-		if (($ShelfNo || $First || $Last || $Map) == null)
+		if (($CallNo || $ShelfNo || $Found || $Time) == null)
 		{
 			echo "Error: Please fill in all fields.";
 		}
 		else
 		{
 			//add to database
-			if ($stmt = $conn->prepare("INSERT INTO FeedBack (CallNo, ShelfNo, Found, Time) VALUES (?,?,?,?)"))
+			if ($stmt = $conn->prepare("INSERT INTO FeedBack (CallNo, ShelfNo, Found, datetime) VALUES (?,?,?,?)"))
 			{
 				$stmt->bind_param("isss",$CallNo,$ShelfNo,$Found,$Time);
 				$stmt->execute();
