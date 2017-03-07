@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White">
+
+    <TextView
+        android:id="@+id/day_type_view"
+        android:text="Type:"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/DarkBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="-16dp" />
+
+
+    <TextView
+        android:id="@+id/today_view"
+        android:text=""
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/day_type_view"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="-16dp"/>
+
+    <TextView
+        android:id="@+id/this_week_view"
+        android:text="This Week:"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/DarkBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_view"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/week_view"
+        android:text=""
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/this_week_view"
+        android:layout_marginLeft="20dp" />
+
+    <ImageButton
+        android:id="@+id/facebook"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/week_view"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/button_facebook"
+        android:background="@color/White"
+        android:onClick="openFacebook"/>
+
+    <ImageButton
+        android:id="@+id/twitter"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignBottom="@id/facebook"
+        android:layout_toRightOf="@id/facebook"
+        android:src="@drawable/button_twitter"
+        android:background="@color/White"
+        android:onClick="openTwitter"/>
+
+</RelativeLayout>
