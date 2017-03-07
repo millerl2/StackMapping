@@ -4,20 +4,20 @@
 		<meta charset = UTF-8">
 		<title> View/Edit FeedBack Statistics </title>
 		<script type = "text/javascript">
-			function confirmDelete(ShelfNo)
+			function confirmDelete(CallNo)
 			{
 				if (confirm("Are you sure you want to delete this record?"))
 				{
-					window.location.href = "bookDelete.php?ShelfNo=" + ShelfNo;
+					window.location.href = "feedbackDelete.php?CallNo=" + CallNo;
 				}
 			} 
-			function editForm(ShelfNo)
+			function editForm(CallNo)
 			{
-				window.open("bookEdit.php?ShelfNo=" + ShelfNo, "Edit Record", "height = 400, width = 500");
+				window.open("feedback.php?CallNo=" + CallNo, "Edit Record", "height = 400, width = 500");
 			}
 			function add()
 			{
-				window.open("bookAdd.php", "Add Record", "height = 400, width = 500");
+				window.open("feedbackAdd.php", "Add Record", "height = 400, width = 500");
 			}
 		</script>
 		<link rel = "stylesheet" type = "text/css" href = "admin.css">
