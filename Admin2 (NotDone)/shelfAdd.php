@@ -15,6 +15,7 @@
 		<br><label>Length:</label><input type = "text" name = "Length" value = ""><br>
 		<br><label>Width:</label><input type = "text" name = "Width" value = ""><br>
 		<br><label>Map:</label><input type = "text" name = "Map" value = ""><br>
+		<br><label>Transform:</label><input type = "text" name = "Transform" value = ""><br>
 		<br><input type = "submit" name = "submit" value = "Submit">
 		</form>
 	</div>
@@ -32,17 +33,18 @@
 		$Length = $conn->real_escape_string($_POST['Length']);
 		$Width = $conn->real_escape_string($_POST['Width']);
 		$Map = $conn->real_escape_string($_POST['Map']);
+		$Transform = $conn->real_escape_string($_POST['Transform']);
 		//check that all fields are filled
-		if (($ShelfNo || $X || $Y || $Length || $Width || $Map) == null)
+		if (($ShelfNo || $X || $Y || $Length || $Width || $Map || $Transform) == null)
 		{
 			echo "Error: Please fill in all fields.";
 		}
 		else
 		{
 			//add to database
-			if ($stmt = $conn->prepare("INSERT INTO ShelfLocations1 (ShelfNo, X, Y, Length, Width, Map) VALUES (?,?,?,?,?,?)"))
+			if ($stmt = $conn->prepare("INSERT INTO ShelfLocations (ShelfNo, X, Y, Length, Width, Map, Transform) VALUES (?,?,?,?,?,?)"))
 			{
-				$stmt->bind_param("isssss",$ShelfNo,$X,$Y,$Length,$Width,$Map);
+				$stmt->bind_param("isssss",$ShelfNo,$X,$Y,$Length,$Width,$Map,$Transform);
 				$stmt->execute();
 				$stmt->close();
 				header("Location: shelfLoc1.php");			
