@@ -30,19 +30,19 @@
 	<?php
 		include ("connect.php");
 		//get records from database
-		if ($data = $conn->query ("SELECT * FROM ShelfLocations1 ORDER BY ShelfNo"))
+		if ($data = $conn->query ("SELECT * FROM ShelfLocations ORDER BY ShelfNo"))
 		{
 			//create and display table of records if there are entries
 			if ($data->num_rows > 0)
 			{
-				echo "<table><tr><th>Shelf No.</th><th>X</th><th>Y</th><th>Length</th><th>Width</th><th>Map</th><th></th><th></th>";
+				echo "<table><tr><th>Shelf No.</th><th>X</th><th>Y</th><th>Width</th><th>Height</th><th>Map</th><th></th><th></th>";
 				while ($row = $data->fetch_object())
 				{
 					echo "<tr><td>" . $row->ShelfNo . "</td>";
 					echo "<td>" . $row->X . "</td>";
 					echo "<td>" . $row->Y . "</td>";
-					echo "<td>" . $row->Length . "</td>";
 					echo "<td>" . $row->Width . "</td>";
+					echo "<td>" . $row->Height . "</td>";
 					echo "<td>" . $row->Map . "</td>";
 					echo "<td><a href = 'javascript:editForm(". $row->ShelfNo .")'>Edit<a/></td>";
 					echo "<td><a href = 'javascript:confirmDelete(". $row->ShelfNo .")'>Delete</a></td></tr>";

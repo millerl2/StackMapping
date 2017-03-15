@@ -4,7 +4,7 @@
 	if (isset($_GET['ShelfNo']) && is_numeric($_GET['ShelfNo']))
 	{
 		$ShelfNo = $_GET['ShelfNo'];
-		if ($stmt = $conn->prepare("DELETE FROM ShelfLocations WHERE ShelfNo = ? LIMIT 1"))
+		if ($stmt = $conn->prepare("DELETE FROM ShelfLocations1 WHERE ShelfNo = ? LIMIT 1"))
 		{
 			$stmt->bind_param("i",$ShelfNo);
 			$stmt->execute();

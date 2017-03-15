@@ -1,6 +1,6 @@
 <?php
 	include ("connect.php");
-	function showData($ShelfNo = '', $X ='', $Y = '', $Length = '', $Width = '', $Map = '', $Transform = '')
+	function showData($ShelfNo = '', $X ='', $Y = '', $Length = '', $Width = '', $Map = '')
 	{ 
 ?>
 		<!DOCTYPE html> 
@@ -20,7 +20,6 @@
 			<br><label>Length:</label><input type = "text" name = "Map" value = "<?php echo $Length; ?>"><br>
 			<br><label>Width:</label><input type = "text" name = "First" value = "<?php echo $Width; ?>"><br>
 			<br><label>Map:</label><input type = "text" name = "Last" value = "<?php echo $Map; ?>"><br>
-			<br><label>Transform:</label><input type = "text" name = "Last" value = "<?php echo $Transform; ?>"><br>
 			<br><input type = "submit" name = "submit" value = "Submit">
 			</form>
 		</div>
@@ -35,7 +34,6 @@
 		$Length = $conn->real_escape_string($_POST['Length']);
 		$Width = $conn->real_escape_string($_POST['Width']);
 		$Map = $conn->real_escape_string($_POST['Map']);
-		$Transform = $conn->real_escape_string($_POST['Transform']);
 		//check that all fields are filled
 		if (($ShelfNo || $X || $Y || $Length || $Width || $Map) == null)
 		{
@@ -43,7 +41,7 @@
 		}
 		else
 		{
-			if ($stmt = $conn->prepare("UPDATE ShelfLocations SET X = ?, Y = ?, Length = ?, Width = ?, Map = ?, Transform = ? WHERE ShelfNo = $ShelfNo"))
+			if ($stmt = $conn->prepare("UPDATE ShelfLocations1 SET X = ?, Y = ?, Length = ?, Width = ?, Map = ? WHERE ShelfNo = $ShelfNo"))
 			{
 				$stmt->bind_param("sssss",$X,$Y,$Length,$Width,$Map);
 				$stmt->execute();
@@ -60,7 +58,7 @@
 	else
 	{
 		$ShelfNo = $_GET['ShelfNo'];
-		if ($stmt = $conn->prepare("SELECT * FROM ShelfLocations WHERE ShelfNo = ?"))
+		if ($stmt = $conn->prepare("SELECT * FROM ShelfLocations1 WHERE ShelfNo = ?"))
 		{
 			$stmt->bind_param("i",$ShelfNo);
 			$stmt->execute();
@@ -68,7 +66,7 @@
 			$data = $stmt->fetch();
 			$stmt->close();
 		}
-		showData($ShelfNo,$X,$Y,$Length,$Width,$Map,$Transform);
+		showData($ShelfNo,$X,$Y,$Length,$Width,$Map);
 	}	
 	$conn->close();
 ?>	
