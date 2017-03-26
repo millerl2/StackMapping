@@ -1,7 +1,7 @@
 import MySQLdb
 import csv
 
-csv_data = csv.reader(file('shelfLocations2.csv'))
+csv_data = csv.reader(file('shelfLocations22.csv'))
 
 ## connect to database
 db = MySQLdb.connect("localhost", "millerl2", "16idxh", "millerl2_db")
@@ -21,19 +21,20 @@ cursor = db.cursor()
 
 ## insert to table
 for row in csv_data:
-	sql = "INSERT INTO `ShelfLocations` (ShelfNo, X, Y, Width, Height, Map) VALUES (%s, %s, %s, %s, %s,%s);" 
+	sql = "INSERT INTO `ShelfLoc` (ShelfNo, X, Y, Width, Height, Map) VALUES (%s, %s, %s, %s, %s,%s);" 
 	cursor.execute(sql, row)
 	db.commit()
 
 ## update data in table
 #for row in csv_data:
-	#sql2 = "UPDATE BookLocations1 SET first=%s, last=%s, map=%s WHERE shelfno=%s;"
+	#sql2 = "UPDATE 'ShelfLocations' SET (ShelfNo=%d, X=%s, Y=%s, Width=%s, Height=%s, Map=%d) WHERE ShelfNo=%d;"
 	#cursor.execute(sql2, row)
 	#db.commit()
+	#print row
 	
 	
 ## Show table
-cursor.execute("""SELECT * FROM ShelfLocations""")
+cursor.execute("""SELECT * FROM ShelfLoc""")
 print cursor.fetchall()	
 
 ### EITHER NOT PRINTING CORRECTLY OR NOT INSERTING CORRECTLY

@@ -21,7 +21,7 @@ cursor = db.cursor()
 
 ## insert to table
 for row in csv_data:
-	sql = "INSERT INTO `ShelfLocations` (ShelfNo, X, Y, Width, Height, Map) VALUES (%s, %s, %s, %s, %s,%s);" 
+	sql = "INSERT INTO `ShelfLocations` (ShelfNo, X, Y, Width, Height, Map) VALUES (%f, %s, %s, %s, %s,%f);" 
 	cursor.execute(sql, row)
 	db.commit()
 
