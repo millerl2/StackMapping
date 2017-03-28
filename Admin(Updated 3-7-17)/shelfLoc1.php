@@ -30,7 +30,7 @@
 	<?php
 		include ("connect.php");
 		//get records from database
-		if ($data = $conn->query ("SELECT * FROM ShelfLocations ORDER BY ShelfNo"))
+		if ($data = $conn->query ("SELECT * FROM ShelfLoc ORDER BY ShelfNo"))
 		{
 			//create and display table of records if there are entries
 			if ($data->num_rows > 0)
