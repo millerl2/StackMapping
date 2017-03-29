@@ -10,8 +10,8 @@
 	<div id = "container">
 		<h1> Administrator Login </h1>
 		<form action = "" method = "post">
-		<label>Username:</label><input type = "text" name = "Username" value = "<?php echo $Username; ?>"><br>
-		<br><label>Password:</label><input type = "password" name = "Password" value = "<?php echo $Password; ?>"><br>
+		<label>Username:</label><input type = "text" name = "Username" value = ""><br>
+		<br><label>Password:</label><input type = "password" name = "Password" value = ""><br>
 		<br><input type = "submit" name = "submit" value = "Enter">
 		</form>
 	</div>
