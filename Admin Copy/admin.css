@@ -1,12 +1,13 @@
 #container
 {
     margin: auto;
-    text-align: center;
+    text-align: left;
+    display: inline;
 }
 button
 {
     border-radius: 8px;
-    background-color: #555555;
+    background-color: #0694CF;
     color: white;
     padding: 1%;
     cursor: pointer;
@@ -15,7 +16,7 @@ button
 }
 button:hover
 {
-    background-color: gray;
+    background-color: #043E7E;
     color: white;
 }
 h1

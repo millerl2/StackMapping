@@ -1,6 +1,6 @@
-<?php
+............<?php
 	include ("connect.php");
-	function showData($ShelfNo = '', $X ='', $Y = '', $Length = '', $Width = '', $Map = '')
+	function showData($ShelfNo = '', $X ='', $Y = '', $Width = '', $Height = '', $Map = '')
 	{ 
 ?>
 		<!DOCTYPE html> 
@@ -17,8 +17,8 @@
 			<label>Shelf No:</label><input type = "text" name = "ShelfNo" value = "<?php echo $ShelfNo; ?>" readonly><br>
 			<br><label>X:</label><input type = "text" name = "First" value = "<?php echo $X; ?>"><br>
 			<br><label>Y:</label><input type = "text" name = "Last" value = "<?php echo $Y; ?>"><br>
-			<br><label>Length:</label><input type = "text" name = "Map" value = "<?php echo $Length; ?>"><br>
-			<br><label>Width:</label><input type = "text" name = "First" value = "<?php echo $Width; ?>"><br>
+			<br><label>Width:</label><input type = "text" name = "Map" value = "<?php echo $Width; ?>"><br>
+			<br><label>Height:</label><input type = "text" name = "First" value = "<?php echo $Height; ?>"><br>
 			<br><label>Map:</label><input type = "text" name = "Last" value = "<?php echo $Map; ?>"><br>
 			<br><input type = "submit" name = "submit" value = "Submit">
 			</form>
@@ -31,19 +31,19 @@
 		$ShelfNo = $_GET['ShelfNo'];
 		$X = $conn->real_escape_string($_POST['X']);
 		$Y = $conn->real_escape_string($_POST['Y']);
-		$Length = $conn->real_escape_string($_POST['Length']);
 		$Width = $conn->real_escape_string($_POST['Width']);
+		$Height = $conn->real_escape_string($_POST['Height']);
 		$Map = $conn->real_escape_string($_POST['Map']);
 		//check that all fields are filled
-		if (($ShelfNo || $X || $Y || $Length || $Width || $Map) == null)
+		if (($ShelfNo || $X || $Y || $Width || $Height || $Map) == null)
 		{
 			echo "Error: Please fill in all fields.";
 		}
 		else
 		{
-			if ($stmt = $conn->prepare("UPDATE ShelfLocations1 SET X = ?, Y = ?, Length = ?, Width = ?, Map = ? WHERE ShelfNo = $ShelfNo"))
+			if ($stmt = $conn->prepare("UPDATE ShelfLocations SET X = ?, Y = ?, Width = ?, Height = ?, Map = ? WHERE ShelfNo = $ShelfNo"))
 			{
-				$stmt->bind_param("sssss",$X,$Y,$Length,$Width,$Map);
+				$stmt->bind_param("ssssi",$X,$Y,$Width,$Height,$Map);
 				$stmt->execute();
 				$stmt->close();
 				header("Location: shelfLoc1.php");
@@ -58,15 +58,15 @@
 	else
 	{
 		$ShelfNo = $_GET['ShelfNo'];
-		if ($stmt = $conn->prepare("SELECT * FROM ShelfLocations1 WHERE ShelfNo = ?"))
+		if ($stmt = $conn->prepare("SELECT * FROM ShelfLocations WHERE ShelfNo = ?"))
 		{
 			$stmt->bind_param("i",$ShelfNo);
 			$stmt->execute();
-			$stmt->bind_result($ShelfNo,$X,$Y,$Length,$Width,$Map);
+			$stmt->bind_result($ShelfNo,$X,$Y,$Width,$Height,$Map);
 			$data = $stmt->fetch();
 			$stmt->close();
 		}
-		showData($ShelfNo,$X,$Y,$Length,$Width,$Map);
+		showData($ShelfNo,$X,$Y,$Width,$Height,$Map);
 	}	
 	$conn->close();
 ?>	
