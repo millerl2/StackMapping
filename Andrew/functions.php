@@ -6,26 +6,25 @@
 		$shelfNum = "";
 		$mapNum = "";
 		$callNum = $data;
-		$found = 0;
 		echo "In searchBooks function....\n";
 		connectDB();
 		$query = "SELECT * FROM BookLocations1";
 		$result = mysql_query($query) or die($result."<br/><br/>".mysql_error());
 		while($row = mysql_fetch_array($result)){
-			if(strcmp($callNum, $row['First']) >= 0 && strcmp($callNum, $row['Last']) <= 0){
+			if(strnatcmp($callNum, $row['First']) >= 0 && strnatcmp($callNum, $row['Last']) <= 0){
 				//getting every shelfNum, possibly because strings are different lengths and cannot compare
 				$shelfNum = $row['ShelfNo'];
 				$mapNum = $row['Map'];
 				//echo "Map type: ".gettype($mapNum);
 				//add positive feedback
 				$found = 1;
-			}			
+				break;
+			}
 			else{
-			//add negative feedback
-			//echo 'NOT FOUND ';
-			$found = 0;
+				$found = 0;
 			}
 		}
+		echo "found: ".$found;
 		postFeedback($callNum, $shelfNum, $found);
 		//echo $shelfNum.' ';
 		
