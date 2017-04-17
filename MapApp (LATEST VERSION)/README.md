@@ -42,5 +42,4 @@ Graphics by
 -----------
 Kelly McInerney
 
-
-
+Copyright 2017 Sojourner Truth Library 
