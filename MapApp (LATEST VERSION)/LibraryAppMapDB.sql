@@ -142,7 +142,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('CPSProjects17','LibraryPass1'),('lee','mill');
+INSERT INTO `login` VALUES ('CPSProjects17','LibraryPass1'),('lee','mill'),('KristyLee','LibraryAdmin1');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
