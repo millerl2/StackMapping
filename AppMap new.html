@@ -14,12 +14,15 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	
-	<!-- App scripts -->
-	<script src="appmap.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css" media="all">
-        #mainfloormap {
+        #bookshelves {
+            margin: 0 auto;
+            display: none;
+        }
+		
+		#mainfloormap {
             margin: 0 auto;
             display: block;
         }
@@ -152,7 +155,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="/newpage/images/stllogowhite.png" height="200%" style="margin-top:1px;position:relative;top:-10px" alt="">
+                    <!-- <img src="/newpage/images/stllogowhite.png" height="200%" style="margin-top:1px;position:relative;top:-10px" alt=""> -->
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -200,6 +203,8 @@
 		</div>
 <!--SVG div container-->
     <div class="bodydiv">
+		<!--Book shelves SVG-->
+		<svg id="bookshelves"></svg>
         <!--Main floor SVG-->
         <svg id="mainfloormap" version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 720 873" style="enable-background:new 0 0 720 873;" xml:space="preserve">
 	<style type="text/css">
@@ -876,7 +881,7 @@
     </div>
 </head>
 
-<body onload="pullHash(); color();">
+<body onload="pullHash();">
     <script type="text/javascript">
         //mouseover popup function
         function pullHash(){
@@ -1120,32 +1125,17 @@
         
         }
 
-         function color() {
+        function color() {
             console.log("started coloring shelves");
             var shelvesToColor = document.getElementsByClassName("st3");
             console.log(shelvesToColor[5]);
             for (var i = 0; i < shelvesToColor.length; i++){
-            	if(shelvesToColor[i]!=undefined){
-                	shelves[i].setAttribute("fill", "#AAAAAA")
+            	if(shelvesToColor[i] != undefined){
+                	shelves[i].setAttribute(null, "fill", "#AAAAAA");
                 }
             }
         }
     </script>
-	<script type="text/javascript">
-			function getLocation(){
-			//src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
-			alert('test');
-			//$.ajax({
-			//url: "getBookLocation.php", //the page containing php script
-			//type: "POST", //request type
-			//data: ({name: str})
-			//success: function(data){
-			//	alert(data);
-			//}
-			//});
-		}
-	
-	</script>
     <div id="about">
         <p>
             <b> STL Library Call Number Locator Tool</b>
@@ -1153,7 +1143,7 @@
             How to use
             <ul>
             <li> Copy Stacks call number from Library Catalog</li>
-            <img src="/newpage/images/instructions.png" width=100%>
+            <!-- <img src="/newpage/images/instructions.png" width=100%> -->
             <li> Paste and Submit </li>
             <li>If a match is found, the shelf will be highlighted red</li>
             <ul>
@@ -1166,12 +1156,116 @@
            	Graphics by Kelly McInerney
         </p>
     </div>
+	
 	<form id="form-new">
 		<div class="bodydiv">
+			<script type="text/javascript">
+			//when user clicks submit button - send textbox value to php variable
+			$(document).ready(function(){
+				$('#form-new').submit(function(event){
+					event.preventDefault();
+					
+					var form = $(this);
+					//get callNum from textbox
+					var data = form.serialize();
+					//console.log(callNum);
+					
+					$.ajax({
+						url: 'functions.php',
+						data: data,
+						aysnc: false,
+						success: function(){
+							getTargetRect();
+							console.log("Got call number...");
+						}
+					});
+				});
+			});
+			
+			function getTargetRect(){
+				console.log("In getTargetRect() function....");
+				$(document).ready(function(){
+					$.ajax({
+						type: 'POST',
+						url: 'functions.php',
+						success: function(jsd){
+							console.log("Going to showTargetRect()... ");
+							showTargetRect(jsd);
+						},
+						error: function(jsd){
+							console.log("Not recieving json properly...");
+							console.log(jsd);
+						}
+					});
+				});
+			}
+			
+			function showTargetRect(data){
+				console.log("In showTargetRect() function....");
+				console.log(data);
+				var svgNS = "http://www.w3.org/2000/svg";
+				//var jsData = [];
+				
+				var targRect = document.createElementNS(svgNS, 'rect');
+				targRect.setAttributeNS(null, 'class', 'shelf'+data[0]);
+				targRect.setAttributeNS(null, 'x', parseFloat(data[1]));
+				targRect.setAttributeNS(null, 'y', parseFloat(data[2]));
+				targRect.setAttributeNS(null, 'height', parseFloat(data[4]));
+				targRect.setAttributeNS(null, 'width', parseFloat(data[3]));
+				targRect.setAttributeNS(null, 'fill', 'red');
+				switch(parseInt(data[5])){
+					case 0:
+						showMain();
+						document.getElementById('bookshelves').appendChild(targRect);
+						break;
+					case 2:
+						showGround();
+						document.getElementById('bookshelves').appendChild(targRect);
+						break;
+					case 1:
+						showConcourse();
+						document.getElementById('bookshelves').appendChild(targRect);
+						break;
+					default:
+						alert("Map " + jsData[5] + " not found");
+						break;
+				}
+				
+				/*				
+				console.log(jsData);
+				var targRect = document.createElementNS(svgNS, 'rect');
+				targRect.setAttributeNS(null, 'class', 'shelf'+jsData[0]);
+				targRect.setAttributeNS(null, 'x', parseFloat(jsData[1]));
+				targRect.setAttributeNS(null, 'y', parseFloat(jsData[2]));
+				targRect.setAttributeNS(null, 'height', parseFloat(jsData[4]));
+				targRect.setAttributeNS(null, 'width', parseFloat(jsData[3]));
+				targRect.setAttributeNS(null, 'fill', 'red');
+				switch(parseInt(jsData[5])){
+					case 0:
+						showMain();
+						document.getElementById('mainfloormap').getElementById('shelves').appendChild(targRect);
+						break;
+					case 2:
+						showGround();
+						document.getElementById('groundfloormap').getElementById('shelves').appendChild(targRect);
+						break;
+					case 1:
+						showConcourse();
+						document.getElementById('concoursemap').getElementById('shelves').appendChild(targRect);
+						break;
+					default:
+						alert("Map " + jsData[5] + " not found");
+						break;
+				}
+				*/
+				document.getElementById("bookshelves").style.display = "block";
+			}
+			</script>
 			<label for="callno">Call Number:</label>
 			<input type="text" id="callnum" name="callNumber" style="width:100%;padding:12px; border-radius: 8px;" placeholder="Enter call number here..."/>
-			<button id="submit" type="submit" >Submit</button>
+			<button id="submit" type="submit">Submit</button>
 		</div>
+		
 	</form>
 </body>
 
