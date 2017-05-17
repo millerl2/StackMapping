@@ -1,0 +1,1129 @@
+
+<!DOCTYPE HTML>
+
+<html>
+<title>
+    Library Book Locator </title>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="true">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="MapApp.css" media="all">
+	<link rel="stylesheet" type="text/css" href="LoginModal.css" media="all">
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="NewPaltz Logo.png" height="200%" style="margin-top:1px;position:relative;top:-10px" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" onclick="showMain();">Main Floor</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showConcourse();">Concourse</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showGround();">Ground Floor</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showAbout();">About</a>
+                    </li>
+					<li>
+                        <a href="#" onclick="document.getElementById('id01').style.display='block'">Login</a>
+					</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!--Modal-->
+    <a id="modalButton" href="#bookFoundModal" data-toggle="modal" data-book-id="my_id_value"></a>
+
+		<div class="modal fade" id="bookFoundModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		          <h4 id="modalHeader" class="modal-title">Call number found!</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p id="modalParagraph"></p>
+		
+		      </div>
+		      <div class="modal-footer">
+				<button type="button" class="btn btn-default" id="submit" style="width:55%; padding: 7px 12px;"
+	                       data-toggle="modal" data-target="#FeedBackModal" data-dismiss="modal"> Send Us a FeedBack</button>
+
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+    <div class="bodydiv">
+			
+		<label for = "callno">Call Number:</label>
+		<input type = "text" id = "textbox1" style="width:100%;padding:12px; border-radius: 8px;"> 
+		<button id = "submit" type = "submit" onclick = "getText()">Submit</button>		
+
+
+
+       <a id="modalButton" href="#FeedBackModal" data-toggle="modal" ></a>
+		<div class="modal fade" id="FeedBackModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		          <h4 id="modalHeader" class="modal-title">Send Us Your FeedBack!</h4>
+		      </div>
+
+		      <div class="modal-body" id="fb" >
+			  <form action = "Admin/Feedback/addFb.php" target = "fbframe" id = "feedback" method = "post">
+		          <div class="form-group fbform">
+						<label for="found"> Found ?</label>
+						<input type = "hidden" name = "callno" id = "callno"> 
+						<label class="radio" style="padding: 10px 30px 10px;"><input type ="radio" name = "found"  value = "yes" checked> Yes </label>
+						<label class="radio" style="padding: 10px 30px 10px;"><input type="radio" name = "found"  value = "no" > No </label>
+						<input type = "submit" name = "fbSubmit" value = "Submit" id="submit" style="width:35%; padding: 7px 12px;" >
+
+    		      </div>
+					</form>
+
+					<iframe style = "display:none;" name="fbframe" src="Admin/Feedback/addFb.php"> </iframe>
+					<script>
+					$(document).ready(function(){
+						
+						$('[name="fbSubmit"]').click(function(){
+							$("#FeedBackModal").modal("hide");
+						});
+							
+					});
+					</script>
+
+				</div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		
+    </div>
+
+	<!--SVG div container-->
+
+    <div class="bodydiv">
+        <!--Main floor SVG-->
+        <svg id="mainfloormap" version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 720 873" style="enable-background:new 0 0 720 873;" xml:space="preserve">
+	<style type="text/css">
+	.st01{fill:#80B4DE;}
+	.st1{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:none;}
+	.st5{font-family:'Helvetica-Light';}
+	.st6{font-size:50px;}
+	.st7{font-family:'Helvetica';}
+	.st8{font-size:24px;}
+	</style>
+	<switch>
+	<foreignobject requiredextensions="&ns_ai;" x="0" y="0" width="1" height="1">
+	<i:pgfref xlink:href="#adobe_illustrator_pgf">
+	</i:pgfref>
+	</foreignobject>
+	<g i:extraneous="self">
+	<g id="color_blocks">
+	<rect x="127.4" y="289" class="st01" width="235.9" height="121.9"/>
+	<rect x="611.6" y="763.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1475.213 156.9141)" class="st01" width="95.2" height="105.7"/>
+	<rect x="605.3" y="63" class="st01" width="104.7" height="98.3"/>
+	<rect x="515.6" y="39.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 609.5916 -452.5783)" class="st01" width="31.1" height="78.2"/>
+	<rect x="409.5" y="31.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 488.0211 -346.5378)" class="st01" width="15.5" height="78.2"/>
+	<rect x="393.6" y="85.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 541.7489 -292.81)" class="st01" width="47.3" height="78.2"/>
+	<rect x="294" y="31.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 372.4856 -231.0023)" class="st01" width="15.5" height="78.2"/>
+	<rect x="278.1" y="85.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 426.2134 -177.2745)" class="st01" width="47.3" height="78.2"/>
+	<rect x="181.2" y="31.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 259.7443 -118.261)" class="st01" width="15.5" height="78.2"/>
+	<rect x="165.3" y="85.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 313.4721 -64.5332)" class="st01" width="47.3" height="78.2"/>
+	<rect x="196.1" y="585.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 835.73 391.0131)" class="st01" width="52.5" height="55.5"/>
+	<rect x="20.9" y="53.3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 167.9032 42.0743)" class="st01" width="84" height="103.4"/>
+	<rect x="10.7" y="176.6" class="st01" width="80.2" height="234.6"/>
+	<rect x="518.1" y="812.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1382.7656 318.8668)" class="st01" width="27.7" height="76.4"/>
+	<rect x="379.1" y="855.9" class="st01" width="77.4" height="8.7"/>
+	<rect x="394" y="765.3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1220.8234 386.2644)" class="st01" width="46.6" height="76.4"/>
+	<rect x="166.9" y="764.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 993.7276 613.3602)" class="st01" width="46.6" height="78.7"/>
+	<polygon class="st01" points="9,785 10,785 10,863 115,863 115,784 91,784 91,539.9 91,539.9 91,519 45,519 45,540 9,540 "/>
+	<rect x="185" y="820.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1049.7029 669.9019)" class="st01" width="9.7" height="79.3"/>
+	</g>
+	<g id="lines">
+	<line class="st1" x1="363.3" y1="410.8" x2="275.4" y2="410.8"/>
+	<line class="st1" x1="361.1" y1="639.6" x2="284.2" y2="639.6"/>
+	<line class="st1" x1="249.5" y1="639.1" x2="194.6" y2="639.1"/>
+	<line class="st1" x1="249.5" y1="585.9" x2="194.6" y2="585.9"/>
+	<line class="st1" x1="194.6" y1="639.1" x2="194.6" y2="586.7"/>
+	<line class="st1" x1="249.5" y1="639.1" x2="249.5" y2="586.7"/>
+	<line class="st1" x1="164.4" y1="639.6" x2="129.6" y2="639.6"/>
+	<line class="st1" x1="361.1" y1="521.8" x2="129.6" y2="521.8"/>
+	<line class="st1" x1="361.1" y1="639.6" x2="361.1" y2="521.8"/>
+	<line class="st1" x1="129.6" y1="639.6" x2="129.6" y2="521.8"/>
+	<line class="st1" x1="90.6" y1="412.9" x2="90.6" y2="324.9"/>
+	<line class="st1" x1="66.1" y1="378" x2="89.2" y2="378"/>
+	<line class="st1" x1="11.7" y1="378" x2="47.7" y2="378"/>
+	<line class="st1" x1="11.7" y1="342.9" x2="89.2" y2="342.9"/>
+	<line class="st1" x1="11.7" y1="293.6" x2="90.9" y2="293.6"/>
+	<line class="st1" x1="11.7" y1="147.4" x2="96.6" y2="147.2"/>
+	<line class="st1" x1="11.7" y1="176.6" x2="90.9" y2="176.6"/>
+	<line class="st1" x1="90.9" y1="285.7" x2="90.9" y2="302.7"/>
+	<line class="st1" x1="91.7" y1="264.5" x2="91.7" y2="176.6"/>
+	<line class="st1" x1="114.6" y1="147.5" x2="114.6" y2="63"/>
+	<line class="st1" x1="228.5" y1="147.5" x2="228.5" y2="101.5"/>
+	<line class="st1" x1="150.3" y1="147.5" x2="150.3" y2="101.5"/>
+	<line class="st1" x1="150.3" y1="148.1" x2="228.5" y2="148.1"/>
+	<line class="st1" x1="150.3" y1="100.8" x2="207.4" y2="100.8"/>
+	<line class="st1" x1="222.1" y1="100.8" x2="227.9" y2="100.8"/>
+	<line class="st1" x1="340.8" y1="147.5" x2="340.8" y2="101.5"/>
+	<line class="st1" x1="262.7" y1="147.5" x2="262.7" y2="101.5"/>
+	<line class="st1" x1="262.7" y1="148.1" x2="340.8" y2="148.1"/>
+	<line class="st1" x1="262.7" y1="100.8" x2="319.7" y2="100.8"/>
+	<line class="st1" x1="334.4" y1="100.8" x2="340.2" y2="100.8"/>
+	<line class="st1" x1="456.4" y1="147.5" x2="456.4" y2="101.5"/>
+	<line class="st1" x1="378.2" y1="147.5" x2="378.2" y2="101.5"/>
+	<line class="st1" x1="378.2" y1="148.1" x2="456.4" y2="148.1"/>
+	<line class="st1" x1="378.2" y1="100.8" x2="435.3" y2="100.8"/>
+	<line class="st1" x1="378.2" y1="78.5" x2="435.3" y2="78.5"/>
+	<line class="st1" x1="449.9" y1="100.8" x2="455.8" y2="100.8"/>
+	<line class="st1" x1="257.2" y1="410.8" x2="207.7" y2="410.8"/>
+	<line class="st1" x1="184" y1="410.6" x2="127.6" y2="410.8"/>
+	<line class="st1" x1="363.3" y1="410" x2="363.3" y2="289"/>
+	<line class="st1" x1="348.5" y1="410" x2="348.5" y2="289"/>
+	<line class="st1" x1="240.7" y1="289" x2="363.3" y2="289"/>
+	<line class="st1" x1="257.2" y1="289" x2="257.2" y2="411"/>
+	<line class="st1" x1="240.7" y1="289" x2="240.7" y2="411"/>
+	<line class="st1" x1="127.4" y1="316.1" x2="127.4" y2="410"/>
+	<line class="st1" x1="223.2" y1="350" x2="128.3" y2="350"/>
+	<line class="st1" x1="224.3" y1="388.4" x2="224.5" y2="289"/>
+	<line class="st1" x1="127.6" y1="289" x2="224.5" y2="289"/>
+	<line class="st1" x1="229" y1="780.2" x2="229" y2="826.2"/>
+	<line class="st1" x1="150.8" y1="780.2" x2="150.8" y2="826.2"/>
+	<line class="st1" x1="115.1" y1="783.4" x2="115.1" y2="826.9"/>
+	<line class="st1" x1="113.6" y1="783.4" x2="91.9" y2="783.4"/>
+	<line class="st1" x1="91.9" y1="517.4" x2="91.9" y2="757.2"/>
+	<line class="st1" x1="115.1" y1="852" x2="115.1" y2="862.9"/>
+	<line class="st1" x1="91.9" y1="778.7" x2="91.9" y2="783.4"/>
+	<line class="st1" x1="56.5" y1="518.5" x2="44.7" y2="518.5"/>
+	<line class="st1" x1="26.4" y1="540.6" x2="11" y2="540.2"/>
+	<line class="st1" x1="44.7" y1="540.3" x2="40.3" y2="540.3"/>
+	<line class="st1" x1="150.8" y1="779.5" x2="229" y2="779.5"/>
+	<line class="st1" x1="150.8" y1="826.9" x2="207.9" y2="826.9"/>
+	<line class="st1" x1="12.5" y1="635.3" x2="91.9" y2="635.3"/>
+	<line class="st1" x1="56.6" y1="518.5" x2="56.6" y2="635.3"/>
+	<line class="st1" x1="44.7" y1="518.5" x2="44.7" y2="635.3"/>
+	<line class="st1" x1="222.6" y1="826.9" x2="228.4" y2="826.9"/>
+	<line class="st1" x1="229.5" y1="862.9" x2="229.5" y2="854.9"/>
+	<line class="st1" x1="150.3" y1="862.9" x2="150.3" y2="854.9"/>
+	<line class="st1" x1="150.3" y1="854.8" x2="207.3" y2="854.8"/>
+	<line class="st1" x1="223.1" y1="854.8" x2="229" y2="854.8"/>
+	<line class="st1" x1="456.7" y1="780.2" x2="456.7" y2="826.2"/>
+	<line class="st1" x1="378.5" y1="780.2" x2="378.5" y2="826.2"/>
+	<line class="st1" x1="378.5" y1="779.5" x2="456.7" y2="779.5"/>
+	<line class="st1" x1="378.5" y1="826.9" x2="435.5" y2="826.9"/>
+	<line class="st1" x1="450.2" y1="826.9" x2="456.1" y2="826.9"/>
+	<line class="st1" x1="457.2" y1="863.9" x2="457.2" y2="854.9"/>
+	<line class="st1" x1="377.9" y1="863.9" x2="377.9" y2="854.9"/>
+	<line class="st1" x1="377.9" y1="854.8" x2="435" y2="854.8"/>
+	<line class="st1" x1="493.7" y1="837" x2="569.5" y2="837"/>
+	<line class="st1" x1="606.2" y1="789.4" x2="606.2" y2="863.9"/>
+	<line class="st1" x1="493.7" y1="855.9" x2="493.7" y2="863.9"/>
+	<line class="st1" x1="698.2" y1="731.4" x2="710.7" y2="731.4"/>
+	<line class="st1" x1="698.2" y1="656" x2="710.7" y2="656"/>
+	<line class="st1" x1="698.2" y1="616.7" x2="710.7" y2="616.7"/>
+	<line class="st1" x1="698.2" y1="541.4" x2="710.7" y2="541.4"/>
+	<line class="st1" x1="698.2" y1="389.3" x2="710.7" y2="389.3"/>
+	<line class="st1" x1="698.2" y1="313" x2="710.7" y2="313"/>
+	<line class="st1" x1="698.2" y1="275.3" x2="709.7" y2="275.3"/>
+	<line class="st1" x1="698.2" y1="199.4" x2="709.7" y2="199.4"/>
+	<line class="st1" x1="604.9" y1="155" x2="604.9" y2="161.2"/>
+	<line class="st1" x1="570.2" y1="63" x2="570.2" y2="94"/>
+	<line class="st1" x1="456.4" y1="63" x2="456.4" y2="78.5"/>
+	<line class="st1" x1="378" y1="63" x2="378" y2="78.5"/>
+	<line class="st1" x1="263" y1="78.5" x2="320.1" y2="78.5"/>
+	<line class="st1" x1="341.2" y1="63" x2="341.2" y2="78.5"/>
+	<line class="st1" x1="262.8" y1="63" x2="262.8" y2="78.5"/>
+	<line class="st1" x1="149.8" y1="78.5" x2="206.8" y2="78.5"/>
+	<line class="st1" x1="227.9" y1="63" x2="227.9" y2="78.5"/>
+	<line class="st1" x1="149.5" y1="63" x2="149.5" y2="78.5"/>
+	<line class="st1" x1="492" y1="87.8" x2="492" y2="94"/>
+	<line class="st1" x1="492" y1="65" x2="492" y2="71.2"/>
+	<line class="st1" x1="604.9" y1="63" x2="604.9" y2="141.3"/>
+	<line class="st1" x1="605.2" y1="161.2" x2="709.7" y2="161.2"/>
+	<line class="st1" x1="492.8" y1="94" x2="570.2" y2="94"/>
+	<line class="st1" x1="493.7" y1="837" x2="493.7" y2="841.7"/>
+	<line class="st1" x1="606.2" y1="767.3" x2="710.7" y2="767.3"/>
+	<line class="st1" x1="606.3" y1="767.3" x2="606.3" y2="772"/>
+	<line class="st1" x1="450.8" y1="854.8" x2="456.6" y2="854.8"/>
+	<polyline class="st2" points="10.1,414.3 11.2,63 709.4,63.8 712,863.7 10,863 10.1,528 "/>
+	</g>
+	<g id="Layer_5">
+	</g>
+	<g id="shelves">
+	<rect id="0" class="0-1 0-4" x="250.1" y="674.8" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 613.4387 1357.6621)" class="st3" width="113.3" height="8"/>
+	<rect id="1"  class="0-5 0-8" x="250.1" y="698.6"  transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 613.4387 1405.1678)" class="st3" width="113.3" height="8"/>
+	<rect id="2"  class="0-9 0-12" x="250.1" y="722.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 613.4387 1452.6735)" class="st3" width="113.3" height="8"/>
+	<rect id="3"  class="0-13 0-16" x="253.9" y="745"  transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 606.498 1499.0541)" class="st3" width="98.8" height="9.1"/>
+	<rect id="4"  x="126.7" y="257.6" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 367.3558 524.4283)" class="st3" width="114" height="9.1"/>
+	<rect id="5"  x="126.7" y="231.5"  transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 367.3558 472.1721)" class="st3" width="114" height="9.1"/>
+	<rect id="6"  x="126.7" y="205.4" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 367.3558 419.9159)" class="st3" width="114" height="9.1"/>
+	<rect id="7"  x="126.7" y="179.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 367.3558 367.6597)" class="st3" width="114" height="9.1"/>
+	<rect id="8"  class="0-14 0-15" x="142.6" y="745" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 341.2264 1499.0541)" class="st3" width="56" height="9.1"/>
+	<rect id="9"  class="0-11 0-10" x="127.4" y="721.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 325.9942 1451.5485)" class="st3" width="71.3" height="9.1"/>
+	<rect id="10"  class="0-7 0-6" x="127.4" y="697.5" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 325.9942 1404.0428)" class="st3" width="71.3" height="9.1"/>
+	<rect id="11"  class="0-3 0-2" x="127.4" y="673.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 325.9942 1356.5372)" class="st3" width="71.3" height="9.1"/>
+	<rect id="12"  x="305.6" y="600.1" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -268.353 940.9537)" class="st3" width="61.3" height="9.1"/>
+	<rect id="13"  x="283" y="600.1" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -290.9509 918.356)" class="st3" width="61.3" height="9.1"/>
+	<rect id="14"  x="258.1" y="600.1" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -315.8703 893.4365)" class="st3" width="61.3" height="9.1"/>
+	<rect id="15"  x="127.8" y="600.1" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -446.2212 763.0856)" class="st3" width="61.3" height="9.1"/>
+	<rect id="16"  x="192.5" y="547.9" class="st3" width="61.3" height="9.1"/>
+	</g>
+	<g id="text">
+	<rect x="7.6" y="15.4" class="st4" width="701.9" height="48.3"/>
+	<text transform="matrix(1 0 0 1 241.8191 51.4319)" class="st5 st6">Main Floor</text>
+	<rect x="440.1" y="447.7" class="st4" width="182" height="56.5"/>
+	<text transform="matrix(1 0 0 1 472.3978 464.9856)"><tspan x="0" y="0" class="st7 st8">Computers</tspan><tspan x="6" y="24" class="st7 st8">& Printers</tspan></text>
+	<rect x="136.1" y="495.6" class="st4" width="218.6" height="23.9"/>
+	<text transform="matrix(1 0 0 1 190.0314 512.8294)" class="st7 st8">Help Desk</text>
+	<rect x="249" y="345" class="st4" width="111.3" height="32.9"/>
+	<text transform="matrix(1 0 0 1 274.0449 362.2889)" class="st7 st8">Stairs</text>
+	</g>
+	</g>
+	</switch>
+	</svg>
+        <!--Ground floor SVG-->
+        <svg id="groundfloormap" version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 720 886.8" style="enable-background:new 0 0 720 886.8;" xml:space="preserve">
+	<style type="text/css">
+	.st02{fill:#FECC83;}
+	.st1{fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:none;}
+	.st5{font-family:'Helvetica-Light';}
+	.st6{font-size:50px;}
+	.st7{font-family:'Helvetica';}
+	.st8{font-size:24px;}
+	</style>
+	<switch>
+	<foreignobject requiredextensions="&ns_ai;" x="0" y="0" width="1" height="1">
+	<i:pgfref xlink:href="#adobe_illustrator_pgf">
+	</i:pgfref>
+	</foreignobject>
+	<g i:extraneous="self">
+	<g id="color_blocks">
+	<rect x="295.6" y="240.3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 713.9703 0.367)" class="st02" width="122.4" height="233.7"/>
+	<rect x="9.7" y="334.5" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 87.7924 726.7601)" class="st02" width="68.4" height="57.7"/>
+	<g>
+	<polygon class="st02" points="246.4,527.9 131.3,527.9 131.3,525.6 8.2,525.6 8.2,527.9 8.2,583.3 8.2,643.7 246.4,643.7 "/>
+	<rect x="8.2" y="643.8" class="st02" width="159.2" height="234.9"/>
+	</g>
+	<rect x="492.5" y="62.5" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 1060.4241 159.5026)" class="st02" width="75.4" height="34.5"/>
+	</g>
+	<g id="lines">
+	<rect x="-48.1" y="119.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 830.6214 110.6306)" class="st1" width="816.2" height="703"/>
+	<line class="st2" x1="568.1" y1="62.4" x2="568.1" y2="97.6"/>
+	<line class="st2" x1="492.5" y1="62.4" x2="492.5" y2="78.8"/>
+	<line class="st2" x1="568.1" y1="97.6" x2="492.5" y2="97.6"/>
+	<line class="st2" x1="78.2" y1="334.3" x2="8.3" y2="334.3"/>
+	<line class="st2" x1="37.4" y1="392.2" x2="8.3" y2="392.2"/>
+	<line class="st2" x1="25.5" y1="525.6" x2="8.3" y2="525.6"/>
+	<line class="st2" x1="246.4" y1="527.7" x2="241.3" y2="527.7"/>
+	<line class="st2" x1="167.6" y1="650.9" x2="167.6" y2="645.8"/>
+	<line class="st2" x1="382.2" y1="336.5" x2="364.6" y2="336.5"/>
+	<line class="st2" x1="454.2" y1="317.6" x2="428.2" y2="317.6"/>
+	<line class="st2" x1="454.4" y1="316.9" x2="454.4" y2="296.2"/>
+	<line class="st2" x1="425.7" y1="335.6" x2="399.6" y2="335.6"/>
+	<line class="st2" x1="439.3" y1="296.2" x2="397.5" y2="296"/>
+	<line class="st2" x1="257.6" y1="418.4" x2="239.7" y2="418.4"/>
+	<line class="st2" x1="257.6" y1="296" x2="239.7" y2="296"/>
+	<line class="st2" x1="364.6" y1="418.4" x2="274.3" y2="418.4"/>
+	<line class="st2" x1="379.4" y1="296" x2="274.3" y2="296"/>
+	<line class="st2" x1="246.4" y1="611.3" x2="195.1" y2="611.3"/>
+	<line class="st2" x1="224.3" y1="527.7" x2="130.6" y2="527.7"/>
+	<line class="st2" x1="130.6" y1="525.6" x2="41" y2="525.6"/>
+	<line class="st2" x1="130.6" y1="639.8" x2="8.5" y2="639.8"/>
+	<line class="st2" x1="247" y1="644.5" x2="131.5" y2="644.5"/>
+	<line class="st2" x1="130.6" y1="551.5" x2="130.6" y2="525.9"/>
+	<line class="st2" x1="473.7" y1="417.6" x2="473.7" y2="296"/>
+	<line class="st2" x1="427.2" y1="394.3" x2="427.2" y2="296"/>
+	<line class="st2" x1="435.3" y1="394.3" x2="435.3" y2="317.6"/>
+	<line class="st2" x1="347.7" y1="417.6" x2="347.7" y2="296"/>
+	<line class="st2" x1="255.1" y1="417.6" x2="255.1" y2="296"/>
+	<line class="st2" x1="239.5" y1="417.6" x2="239.5" y2="296"/>
+	<line class="st2" x1="364.3" y1="394.3" x2="473.7" y2="394.3"/>
+	<line class="st2" x1="221.8" y1="608.8" x2="221.8" y2="594.7"/>
+	<line class="st2" x1="364.3" y1="418.4" x2="364.3" y2="394.6"/>
+	<line class="st2" x1="390.1" y1="418.4" x2="390.1" y2="394.6"/>
+	<line class="st2" x1="364.6" y1="335.6" x2="364.6" y2="296"/>
+	<line class="st2" x1="419.3" y1="418.4" x2="406" y2="418.4"/>
+	<line class="st2" x1="416.7" y1="418.4" x2="416.7" y2="394.6"/>
+	<line class="st2" x1="445.7" y1="418.4" x2="432.5" y2="418.4"/>
+	<line class="st2" x1="443.2" y1="418.4" x2="443.2" y2="394.6"/>
+	<line class="st2" x1="472.2" y1="418.4" x2="458.9" y2="418.4"/>
+	<line class="st2" x1="469.7" y1="418.4" x2="469.7" y2="394.6"/>
+	<line class="st2" x1="195.1" y1="644" x2="195.1" y2="593.3"/>
+	<line class="st2" x1="130.6" y1="644.2" x2="130.6" y2="569.4"/>
+	<line class="st2" x1="167.6" y1="878.8" x2="167.6" y2="674.5"/>
+	<line class="st2" x1="247" y1="644.2" x2="247" y2="527.9"/>
+	<line class="st2" x1="78.1" y1="392.2" x2="51.7" y2="392.2"/>
+	<line class="st2" x1="78.5" y1="392.2" x2="78.5" y2="334.5"/>
+	</g>
+	<g id="shelves">
+	<rect x="649.7" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 807.8433 -548.7484)" class="st3" width="57.2" height="7.9"/>
+	<rect x="626.9" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 785.0153 -525.9203)" class="st3" width="57.2" height="7.9"/>
+	<rect x="604.1" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 762.1873 -503.0923)" class="st3" width="57.2" height="7.9"/>
+	<rect x="581.2" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 739.3593 -480.2644)" class="st3" width="57.2" height="7.9"/>
+	<rect x="558.4" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 716.5313 -457.4364)" class="st3" width="57.2" height="7.9"/>
+	<rect x="535.6" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 693.7033 -434.6084)" class="st3" width="57.2" height="7.9"/>
+	<rect x="512.7" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 670.8753 -411.7804)" class="st3" width="57.2" height="7.9"/>
+	<rect x="489.9" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 648.0473 -388.9524)" class="st3" width="57.2" height="7.9"/>
+	<rect x="469.2" y="125.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 627.2947 -368.1998)" class="st3" width="57.2" height="7.9"/>
+	<rect x="544.2" y="234.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 825.124 -348.8437)" class="st3" width="85.5" height="7.9"/>
+	<rect x="521.4" y="234.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 802.296 -326.0157)" class="st3" width="85.5" height="7.9"/>
+	<rect x="498.6" y="234.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 779.468 -303.1877)" class="st3" width="85.5" height="7.9"/>
+	<rect x="475.8" y="234.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 756.64 -280.3597)" class="st3" width="85.5" height="7.9"/>
+	<rect x="455" y="234.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 735.8874 -259.6071)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="118.8" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 245.5091)" class="st3" width="85.5" height="7.9"/>
+	<rect x="27.9" y="97" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 201.9357)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="108.6" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 225.0609)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="120.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 248.1862)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="131.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 271.3114)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="143.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 294.4367)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="154.8" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 317.562)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="166.4" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 340.6873)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="177.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 363.8125)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="201.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 410.063)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="189.5" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 386.9378)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="212.6" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 433.1883)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="224.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 456.3136)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="235.8" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 479.4388)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="247.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 502.5641)" class="st3" width="79.8" height="7.9"/>
+	<rect x="27.9" y="258.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 135.5251 525.6894)" class="st3" width="79.8" height="7.9"/>
+	<rect x="9.1" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -428.543 512.8755)" class="st3" width="66.1" height="7.9"/>
+	<rect x="20.5" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -417.1385 524.28)" class="st3" width="66.1" height="7.9"/>
+	<rect x="31.9" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -405.734 535.6844)" class="st3" width="66.1" height="7.9"/>
+	<rect x="43.3" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -394.3296 547.0889)" class="st3" width="66.1" height="7.9"/>
+	<rect x="54.7" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -382.9251 558.4934)" class="st3" width="66.1" height="7.9"/>
+	<rect x="66.1" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -371.5207 569.8979)" class="st3" width="66.1" height="7.9"/>
+	<rect x="77.5" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -360.1162 581.3023)" class="st3" width="66.1" height="7.9"/>
+	<rect x="88.9" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -348.7117 592.7068)" class="st3" width="66.1" height="7.9"/>
+	<rect x="100.3" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -337.3073 604.1113)" class="st3" width="66.1" height="7.9"/>
+	<rect x="111.7" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -325.9028 615.5157)" class="st3" width="66.1" height="7.9"/>
+	<rect x="123.2" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -314.4983 626.9202)" class="st3" width="66.1" height="7.9"/>
+	<rect x="134.6" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -303.0939 638.3246)" class="st3" width="66.1" height="7.9"/>
+	<rect x="146" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -291.6894 649.7291)" class="st3" width="66.1" height="7.9"/>
+	<rect x="157.4" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -280.2849 661.1336)" class="st3" width="66.1" height="7.9"/>
+	<rect x="168.8" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -268.8805 672.5381)" class="st3" width="66.1" height="7.9"/>
+	<rect x="180.2" y="466.7" transform="matrix(6.123234e-17 -1 1 6.123234e-17 -257.476 683.9425)" class="st3" width="66.1" height="7.9"/>
+	<rect x="136.3" y="129.6" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 267.0614)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="140.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 288.6137)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="151.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 310.1661)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="161.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 331.7184)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="172.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 353.2707)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="183.4" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 374.8231)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="194.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 396.3754)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="205" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 417.9277)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="226.5" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 461.0324)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="237.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 482.5847)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="248.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 504.137)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="258.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 525.6894)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="269.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 547.2417)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="280.4" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 568.794)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="291.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 590.3464)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="302" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 611.8987)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="312.8" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 633.451)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="323.5" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 655.0034)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="334.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 676.5557)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="345.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 698.108)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="355.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 719.6603)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="366.6" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 741.2126)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="377.4" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 762.765)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="388.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 784.3173)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="399" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 805.8696)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="409.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 827.4219)" class="st3" width="85.5" height="7.9"/>
+	<rect x="136.3" y="215.8" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 358.1113 439.48)" class="st3" width="85.5" height="7.9"/>
+	<rect x="405.5" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 662.9291 -282.7739)" class="st3" width="134.6" height="7.9"/>
+	<rect x="394.3" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 651.6785 -271.5233)" class="st3" width="134.6" height="7.9"/>
+	<rect x="383" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 640.4279 -260.2727)" class="st3" width="134.6" height="7.9"/>
+	<rect x="371.8" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 629.1772 -249.0221)" class="st3" width="134.6" height="7.9"/>
+	<rect x="360.5" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 617.9266 -237.7715)" class="st3" width="134.6" height="7.9"/>
+	<rect x="349.3" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 606.676 -226.5209)" class="st3" width="134.6" height="7.9"/>
+	<rect x="338" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 595.4254 -215.2703)" class="st3" width="134.6" height="7.9"/>
+	<rect x="326.8" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 584.1749 -204.0197)" class="st3" width="134.6" height="7.9"/>
+	<rect x="315.5" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 572.9243 -192.7691)" class="st3" width="134.6" height="7.9"/>
+	<rect x="304.3" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 561.6736 -181.5185)" class="st3" width="134.6" height="7.9"/>
+	<rect x="293" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 550.423 -170.2679)" class="st3" width="134.6" height="7.9"/>
+	<rect x="281.8" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 539.1724 -159.0173)" class="st3" width="134.6" height="7.9"/>
+	<rect x="270.5" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 527.9218 -147.7666)" class="st3" width="134.6" height="7.9"/>
+	<rect x="259.3" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 516.6712 -136.5161)" class="st3" width="134.6" height="7.9"/>
+	<rect x="248" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 505.4206 -125.2654)" class="st3" width="134.6" height="7.9"/>
+	<rect x="236.8" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 494.17 -114.0148)" class="st3" width="134.6" height="7.9"/>
+	<rect x="225.5" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 482.9194 -102.7642)" class="st3" width="134.6" height="7.9"/>
+	<rect x="214.3" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 471.6688 -91.5136)" class="st3" width="134.6" height="7.9"/>
+	<rect x="203" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 460.4182 -80.263)" class="st3" width="134.6" height="7.9"/>
+	<rect x="191.8" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 449.1676 -69.0124)" class="st3" width="134.6" height="7.9"/>
+	<rect x="180.5" y="186.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 437.917 -57.7618)" class="st3" width="134.6" height="7.9"/>
+	<rect x="537" y="355.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 946.4624 -227.5053)" class="st3" width="99.9" height="7.9"/>
+	<rect x="514.2" y="355.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 923.6344 -204.6773)" class="st3" width="99.9" height="7.9"/>
+	<rect x="491.4" y="355.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 900.8064 -181.8493)" class="st3" width="99.9" height="7.9"/>
+	<rect x="468.6" y="355.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 877.9784 -159.0213)" class="st3" width="99.9" height="7.9"/>
+	<rect x="447.8" y="355.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 857.2258 -138.2687)" class="st3" width="99.9" height="7.9"/>
+	<rect x="522" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1058.3069 -70.0048)" class="st3" width="84.2" height="7.9"/>
+	<rect x="499.2" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1035.4789 -47.1768)" class="st3" width="84.2" height="7.9"/>
+	<rect x="476.4" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1012.6509 -24.3488)" class="st3" width="84.2" height="7.9"/>
+	<rect x="455.6" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 991.8983 -3.5962)" class="st3" width="84.2" height="7.9"/>
+	<rect x="437.6" y="483.3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 960.1138 14.426)" class="st3" width="70.5" height="7.9"/>
+	<rect x="552.3" y="483.3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1074.7948 -100.2551)" class="st3" width="70.5" height="7.9"/>
+	<rect x="323.5" y="483.3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 845.9738 128.5659)" class="st3" width="70.5" height="7.9"/>
+	<rect x="407.9" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 944.1669 44.1351)" class="st3" width="84.2" height="7.9"/>
+	<rect x="385.1" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 921.339 66.9631)" class="st3" width="84.2" height="7.9"/>
+	<rect x="362.2" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 898.511 89.7911)" class="st3" width="84.2" height="7.9"/>
+	<rect x="340.1" y="490.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 876.3748 111.9273)" class="st3" width="84.2" height="7.9"/>
+	<rect x="544.7" y="590.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1181.655 7.6874)" class="st3" width="84.7" height="7.9"/>
+	<rect x="514.1" y="598.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1166.5221 38.2104)" class="st3" width="100.1" height="7.9"/>
+	<rect x="491.3" y="598.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1143.6941 61.0384)" class="st3" width="100.1" height="7.9"/>
+	<rect x="468.5" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1120.4346 83.4348)" class="st3" width="100.1" height="7.9"/>
+	<rect x="447.7" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1099.682 104.1874)" class="st3" width="100.1" height="7.9"/>
+	<rect x="400" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1051.9506 151.9188)" class="st3" width="100.1" height="7.9"/>
+	<rect x="377.2" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1029.1226 174.7468)" class="st3" width="100.1" height="7.9"/>
+	<rect x="354.3" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1006.2946 197.5748)" class="st3" width="100.1" height="7.9"/>
+	<rect x="430.5" y="590.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1067.5151 121.8274)" class="st3" width="84.7" height="7.9"/>
+	<rect x="316.4" y="590.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 953.3752 235.9673)" class="st3" width="84.7" height="7.9"/>
+	<rect x="332.2" y="598.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 984.59 220.1425)" class="st3" width="100.1" height="7.9"/>
+	<rect x="285.8" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 937.8107 266.0587)" class="st3" width="100.1" height="7.9"/>
+	<rect x="263" y="598" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 914.9827 288.8867)" class="st3" width="100.1" height="7.9"/>
+	<rect x="240.9" y="598.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 893.278 311.4544)" class="st3" width="100.1" height="7.9"/>
+	<rect x="552.1" y="698.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1289.4327 114.3828)" class="st3" width="70.9" height="6.9"/>
+	<rect x="558.9" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1399.5247 224.4747)" class="st3" width="57.3" height="6.9"/>
+	<rect x="535.8" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1376.465 247.5345)" class="st3" width="57.3" height="6.9"/>
+	<rect x="512.8" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1353.4053 270.5942)" class="st3" width="57.3" height="6.9"/>
+	<rect x="490.6" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1331.2679 292.7315)" class="st3" width="57.3" height="6.9"/>
+	<rect x="466.6" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1307.2858 316.7137)" class="st3" width="57.3" height="6.9"/>
+	<rect x="422.4" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1263.0111 360.9883)" class="st3" width="57.3" height="6.9"/>
+	<rect x="399.3" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1239.9514 384.0481)" class="st3" width="57.3" height="6.9"/>
+	<rect x="376.2" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1216.8916 407.1078)" class="st3" width="57.3" height="6.9"/>
+	<rect x="353.2" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1193.8319 430.1675)" class="st3" width="57.3" height="6.9"/>
+	<rect x="330.1" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1170.7722 453.2272)" class="st3" width="57.3" height="6.9"/>
+	<rect x="308" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1148.6349 475.3646)" class="st3" width="57.3" height="6.9"/>
+	<rect x="581.9" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1422.5845 201.415)" class="st3" width="57.3" height="6.9"/>
+	<rect x="605" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1445.6442 178.3553)" class="st3" width="57.3" height="6.9"/>
+	<rect x="627.1" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1467.7815 156.218)" class="st3" width="57.3" height="6.9"/>
+	<rect x="649.3" y="808.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1489.9188 134.0806)" class="st3" width="57.3" height="6.9"/>
+	<rect x="521.8" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1272.967 144.6553)" class="st3" width="84.7" height="7.9"/>
+	<rect x="499" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1250.139 167.4833)" class="st3" width="84.7" height="7.9"/>
+	<rect x="476.2" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1227.311 190.3113)" class="st3" width="84.7" height="7.9"/>
+	<rect x="455.4" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1206.5585 211.0639)" class="st3" width="84.7" height="7.9"/>
+	<rect x="430.5" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1181.655 235.9673)" class="st3" width="84.7" height="7.9"/>
+	<rect x="407.7" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1158.8271 258.7953)" class="st3" width="84.7" height="7.9"/>
+	<rect x="384.9" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1135.9991 281.6233)" class="st3" width="84.7" height="7.9"/>
+	<rect x="362" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1113.1711 304.4513)" class="st3" width="84.7" height="7.9"/>
+	<rect x="339.9" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1091.0349 326.5875)" class="st3" width="84.7" height="7.9"/>
+	<rect x="316.4" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1067.5151 350.1072)" class="st3" width="84.7" height="7.9"/>
+	<rect x="293.5" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1044.6871 372.9352)" class="st3" width="84.7" height="7.9"/>
+	<rect x="270.7" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1021.8592 395.7632)" class="st3" width="84.7" height="7.9"/>
+	<rect x="248.6" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 999.723 417.8994)" class="st3" width="84.7" height="7.9"/>
+	<rect x="248.6" y="819.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1114.0992 532.2756)" class="st3" width="84.7" height="7.9"/>
+	<rect x="225.1" y="819.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1090.5795 555.7954)" class="st3" width="84.7" height="7.9"/>
+	<rect x="201.5" y="819.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1067.0597 579.3152)" class="st3" width="84.7" height="7.9"/>
+	<rect x="179.5" y="819.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1044.9906 601.3843)" class="st3" width="84.7" height="7.9"/>
+	<rect x="156.3" y="819.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1021.8455 624.5294)" class="st3" width="84.7" height="7.9"/>
+	<rect x="225.1" y="704.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 976.2032 441.4192)" class="st3" width="84.7" height="7.9"/>
+	<rect x="209.2" y="711.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 960.307 471.0448)" class="st3" width="70.9" height="7.8"/>
+	<rect x="186.3" y="711.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 937.479 493.8728)" class="st3" width="70.9" height="7.8"/>
+	<rect x="163.5" y="711.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 914.651 516.7007)" class="st3" width="70.9" height="7.8"/>
+	</g>
+	<g id="text">
+	<rect x="7.5" y="14" class="st4" width="704.9" height="48.3"/>
+	<text transform="matrix(1 0 0 1 212.7262 50.0434)" class="st5 st6">Ground Floor</text>
+	<rect x="202.5" y="343.8" class="st4" width="195.3" height="61.5"/>
+	<text transform="matrix(1 0 0 1 269.459 361.0605)" class="st7 st8">Stairs</text>
+	<rect x="-3.9" y="560.7" class="st4" width="137.5" height="50.7"/>
+	<text transform="matrix(1 0 0 1 31.5566 577.9268)"><tspan x="0" y="0" class="st7 st8">Micro-</tspan><tspan x="3.3" y="24" class="st7 st8">forms</tspan></text>
+	</g>
+	</g>
+	</switch>
+	</svg>
+        <!--Concourse SVG-->
+        <svg id="concoursemap" version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 720 900" style="enable-background:new 0 0 720 900;" xml:space="preserve">
+	<style type="text/css">
+	.st0{fill:#CAD08F;}
+	.st1{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+
+	.st4{fill:none;}
+	.st5{font-family:'Helvetica-Light';}
+	.st6{font-size:50px;}
+	.st7{font-family:'Helvetica';}
+	.st8{font-size:24px;}
+	</style>
+	<switch>
+	<foreignobject requiredextensions="&ns_ai;" x="0" y="0" width="1" height="1">
+	<i:pgfref xlink:href="#adobe_illustrator_pgf">
+	</i:pgfref>
+	</foreignobject>
+	<g i:extraneous="self">
+	<g id="color_blocks">
+	<rect x="491.4" y="861.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 1064.6666 1752.2413)" class="st0" width="81.9" height="29.8"/>
+	<rect x="499.5" y="63.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 1072.8273 150.6967)" class="st0" width="73.7" height="24.5"/>
+	<polygon class="st0" points="365.4,421.2 365.4,421.1 477.8,421.1 477.8,395.3 479.2,395.3 479.2,292.6 365.4,292.6 235.4,292.6 235.4,421.2 "/>
+	<rect x="9.1" y="63.1" class="st0" width="238.2" height="118"/>
+	<polygon class="st0" points="187.5,888.8 188.1,888.8 266.6,888.8 266.6,792.8 282.4,792.8 282.4,717.9 266.6,717.9 231,717.9 209.9,717.9 209.9,683.2 188.1,683.2 188.1,653.4 191.6,653.4 191.6,648 242.9,648 242.9,526 191.6,526 191.6,525.5 129.7,525.5 129.7,480.5 162.4,480.5 162.4,411.3 132.7,411.3 132.7,411.3 59.3,411.3 59.3,408.9 59.3,404 59.3,349.7 10.1,349.7 10.1,408.9 10.1,466.7 10.1,524.5 10.1,653.4 10.1,888.8 "/>
+	</g>
+	<g id="lines">
+	<line class="st1" x1="9.3" y1="690.7" x2="148.9" y2="690.7"/>
+	<line class="st1" x1="148.9" y1="690.7" x2="148.9" y2="821.5"/>
+	<line class="st1" x1="145.2" y1="844.3" x2="145.2" y2="859.1"/>
+	<line class="st1" x1="27.1" y1="890" x2="27.1" y2="872"/>
+	<line class="st1" x1="145.2" y1="850.5" x2="82.2" y2="850.5"/>
+	<line class="st1" x1="27.1" y1="872" x2="82.2" y2="872"/>
+	<line class="st1" x1="82.2" y1="850.5" x2="82.2" y2="872"/>
+	<line class="st1" x1="243.5" y1="579.4" x2="243.5" y2="526"/>
+	<line class="st1" x1="110.3" y1="526" x2="243.5" y2="526"/>
+	<line class="st1" x1="129.2" y1="411.3" x2="129.2" y2="526"/>
+	<line class="st1" x1="45.7" y1="411.3" x2="129.2" y2="411.3"/>
+	<line class="st1" x1="45.7" y1="529.3" x2="45.7" y2="411.3"/>
+	<line class="st1" x1="87.4" y1="526" x2="45.7" y2="526"/>
+	<line class="st1" x1="82.4" y1="655.3" x2="82.4" y2="526"/>
+	<line class="st1" x1="45.7" y1="655.3" x2="45.7" y2="548.4"/>
+	<line class="st1" x1="82.4" y1="590.6" x2="45.7" y2="590.6"/>
+	<line class="st1" x1="187.5" y1="655.3" x2="129.2" y2="655.3"/>
+	<line class="st1" x1="129.2" y1="640.8" x2="129.2" y2="655.3"/>
+	<line class="st1" x1="121.6" y1="640.8" x2="129.2" y2="640.8"/>
+	<line class="st1" x1="121.6" y1="655.3" x2="121.6" y2="640.8"/>
+	<line class="st1" x1="82.4" y1="655.3" x2="121.6" y2="655.3"/>
+	<line class="st1" x1="228.3" y1="648" x2="243.5" y2="648"/>
+	<line class="st1" x1="243.5" y1="595.9" x2="243.5" y2="648"/>
+	<line class="st1" x1="191.6" y1="595.9" x2="243.5" y2="595.9"/>
+	<line class="st1" x1="191.6" y1="648" x2="191.6" y2="595.9"/>
+	<line class="st1" x1="205.3" y1="648" x2="191.6" y2="648"/>
+	<line class="st1" x1="187.5" y1="693.5" x2="187.5" y2="677.3"/>
+	<line class="st1" x1="209.9" y1="682.3" x2="187.5" y2="682.3"/>
+	<line class="st1" x1="209.9" y1="717.9" x2="209.9" y2="682.3"/>
+	<line class="st1" x1="187.5" y1="717.9" x2="209.9" y2="717.9"/>
+	<line class="st1" x1="187.5" y1="708" x2="187.5" y2="877.5"/>
+	<line class="st1" x1="270.4" y1="877.5" x2="187.5" y2="877.5"/>
+	<line class="st1" x1="266.6" y1="889.4" x2="266.6" y2="877.5"/>
+	<line class="st1" x1="195.4" y1="890" x2="195.4" y2="877.5"/>
+	<line class="st1" x1="233.6" y1="890" x2="233.6" y2="877.5"/>
+	<line class="st1" x1="149.1" y1="874.9" x2="129.2" y2="874.9"/>
+	<line class="st1" x1="129.2" y1="890" x2="129.2" y2="874.9"/>
+	<line class="st1" x1="101.7" y1="890" x2="101.7" y2="874.9"/>
+	<line class="st1" x1="129.2" y1="881.5" x2="101.7" y2="881.5"/>
+	<line class="st1" x1="247.2" y1="181.1" x2="247.2" y2="88.2"/>
+	<line class="st1" x1="9.1" y1="181.1" x2="247.2" y2="181.1"/>
+	<line class="st1" x1="479" y1="292.6" x2="478.4" y2="411.3"/>
+	<line class="st1" x1="364.4" y1="393.5" x2="477.8" y2="393.5"/>
+	<line class="st1" x1="460.8" y1="421.2" x2="471.7" y2="421.2"/>
+	<line class="st1" x1="435" y1="421.2" x2="446.6" y2="421.2"/>
+	<line class="st1" x1="409" y1="421.2" x2="420.6" y2="421.2"/>
+	<line class="st1" x1="379.6" y1="421.2" x2="393.2" y2="421.2"/>
+	<line class="st1" x1="420.6" y1="393.5" x2="420.6" y2="421.2"/>
+	<line class="st1" x1="393.2" y1="393.5" x2="393.2" y2="421.2"/>
+	<line class="st1" x1="446.6" y1="393.5" x2="446.6" y2="421.2"/>
+	<line class="st1" x1="471.7" y1="393.5" x2="471.7" y2="421.2"/>
+	<line class="st1" x1="9.3" y1="349.7" x2="59.3" y2="349.7"/>
+	<line class="st1" x1="59.3" y1="393.5" x2="59.3" y2="349.7"/>
+	<line class="st1" x1="35" y1="384.4" x2="59.3" y2="384.4"/>
+	<line class="st1" x1="9.3" y1="384.4" x2="16.6" y2="384.4"/>
+	<line class="st1" x1="429.6" y1="393.5" x2="429.6" y2="315"/>
+	<line class="st1" x1="441" y1="393.5" x2="441" y2="315"/>
+	<line class="st1" x1="429.6" y1="315" x2="441" y2="315"/>
+	<line class="st1" x1="457.8" y1="292.6" x2="457.8" y2="317.6"/>
+	<line class="st1" x1="441" y1="318.3" x2="457.8" y2="318.3"/>
+	<line class="st1" x1="274" y1="292.6" x2="479" y2="292.6"/>
+	<line class="st1" x1="403.4" y1="335.4" x2="428.8" y2="335.4"/>
+	<line class="st1" x1="364.4" y1="334.4" x2="364.4" y2="292.6"/>
+	<line class="st1" x1="384.1" y1="335.2" x2="364.4" y2="335.2"/>
+	<line class="st1" x1="374.2" y1="393.5" x2="374.2" y2="335.2"/>
+	<line class="st1" x1="364.4" y1="393.5" x2="364.4" y2="421.2"/>
+	<line class="st1" x1="347.7" y1="421.2" x2="347.7" y2="292.6"/>
+	<line class="st1" x1="364.4" y1="421.2" x2="274" y2="421.2"/>
+	<line class="st1" x1="256.7" y1="292.6" x2="256.7" y2="419.8"/>
+	<line class="st1" x1="235.9" y1="420.8" x2="235.9" y2="292.6"/>
+	<line class="st1" x1="258.7" y1="292.6" x2="235.9" y2="292.6"/>
+	<line class="st1" x1="246.3" y1="427" x2="246.3" y2="420.8"/>
+	<line class="st1" x1="258.7" y1="420.8" x2="235.9" y2="420.8"/>
+	<line class="st1" x1="129.2" y1="411.3" x2="162.4" y2="411.3"/>
+	<line class="st1" x1="162.4" y1="480.5" x2="162.4" y2="411.3"/>
+	<line class="st1" x1="209.9" y1="717.9" x2="282.7" y2="717.9"/>
+	<line class="st1" x1="282.7" y1="792.8" x2="282.7" y2="717.9"/>
+	<line class="st1" x1="573.3" y1="890" x2="573.3" y2="861.2"/>
+	<line class="st1" x1="491.4" y1="861.2" x2="573.3" y2="861.2"/>
+	<line class="st1" x1="499.5" y1="63.1" x2="499.5" y2="71.6"/>
+	<line class="st1" x1="491.4" y1="881.5" x2="491.4" y2="890"/>
+	<line class="st1" x1="435.3" y1="861.2" x2="435.3" y2="881.5"/>
+	<line class="st1" x1="413.6" y1="861.2" x2="413.6" y2="881.5"/>
+	<line class="st1" x1="387.8" y1="861.2" x2="387.8" y2="881.5"/>
+	<line class="st1" x1="435.3" y1="881.5" x2="425.8" y2="881.5"/>
+	<line class="st1" x1="413" y1="881.5" x2="403.5" y2="881.5"/>
+	<line class="st1" x1="387.5" y1="881.5" x2="374.2" y2="881.5"/>
+	<line class="st1" x1="425.8" y1="881.5" x2="425.8" y2="890"/>
+	<line class="st1" x1="402.7" y1="881.5" x2="402.7" y2="890"/>
+	<line class="st1" x1="374.2" y1="881.5" x2="374.2" y2="889.7"/>
+	<line class="st1" x1="573.3" y1="63.2" x2="573.3" y2="87.6"/>
+	<line class="st1" x1="499.5" y1="87.6" x2="573.3" y2="87.6"/>
+	<rect x="-53" y="125.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 837.291 116.1347)" class="st2" width="827.2" height="703"/>
+	<line class="st1" x1="247.3" y1="69.9" x2="247.3" y2="63.1"/>
+	</g>
+	<g id="shelves">
+	<rect id="18" class="1-85 1-90" x="588.5" y="121.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 744.2765 -493.2917)" class="st3" width="60.6" height="7.5"/>
+	<rect id="19" class="1-79 1-84" x="564.2" y="121.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 719.9247 -468.94)" class="st3" width="60.6" height="7.5"/>
+	<rect id="20" class="1-73 1-78" x="539.8" y="121.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 695.5731 -444.5883)" class="st3" width="60.6" height="7.5"/>
+	<rect id="21" class="1-67 1-72" x="515.5" y="121.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 671.2213 -420.2366)" class="st3" width="60.6" height="7.5"/>
+	<rect id="22" class="1-61 1-66" x="494.3" y="121.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 650.1167 -399.132)" class="st3" width="60.6" height="7.5"/>
+	<!-- Missing? <rect class="Missing"   x="470" y="121.7" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 625.765 -374.7803)" class="st3" width="60.6" height="7.5"/> -->
+	<rect id="24" class="1-86 1-89" x="574.9" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 848.671 -388.8972)" class="st3" width="87.7" height="7.5"/>
+	<rect id="25" class="1-80 1-83" x="550.6" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 824.3193 -364.5454)" class="st3" width="87.7" height="7.5"/>
+	<rect id="26" class="1-74 1-77" x="526.2" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 799.9677 -340.1938)" class="st3" width="87.7" height="7.5"/>
+	<rect id="27" class="1-68 1-71" x="501.9" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 775.6159 -315.842)" class="st3" width="87.7" height="7.5"/>
+	<rect id="28" class="1-62 1-65" x="480.8" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 754.5113 -294.7374)" class="st3" width="87.7" height="7.5"/>
+	<rect id="29" class="1-57 1-60" x="456.4" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 730.1595 -270.3857)" class="st3" width="87.7" height="7.5"/>
+	<rect id="30" class="1-55 1-56" x="435.3" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 709.0549 -249.2811)" class="st3" width="87.7" height="7.5"/>
+	<rect id="31" class="1-53 1-54" x="411" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 684.7032 -224.9294)" class="st3" width="87.7" height="7.5"/>
+	<rect id="32" class="1-51 1-52" x="386.6" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 660.3515 -200.5776)" class="st3" width="87.7" height="7.5"/>
+	<rect id="33" class="1-49 1-50" x="362.3" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 635.9998 -176.2259)" class="st3" width="87.7" height="7.5"/>
+	<rect id="34" class="1-47 1-48" x="341.2" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 614.8952 -155.1213)" class="st3" width="87.7" height="7.5"/>
+	<rect id="35" class="1-45 1-46" x="316.8" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 590.5435 -130.7696)" class="st3" width="87.7" height="7.5"/>
+	<rect id="36" class="1-43 1-44" x="293.7" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 567.4644 -107.6905)" class="st3" width="87.7" height="7.5"/>
+	<rect id="37" class="1-41 1-42" x="269.4" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 543.1127 -83.3388)" class="st3" width="87.7" height="7.5"/>
+	<rect id="38" class="1-39 1-40" x="248.3" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 522.0081 -62.2341)" class="st3" width="87.7" height="7.5"/>
+	<rect id="39" class="1-37 1-38" x="223.9" y="226.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 497.6563 -37.8824)" class="st3" width="87.7" height="7.5"/>
+	<rect id="40" class="1-35 1-36" x="207" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 480.6911 -8.6895)" class="st3" width="75.5" height="7.5"/>
+	<rect id="41" class="1-31 1-34" x="182.2" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 455.8997 16.1019)" class="st3" width="75.5" height="7.5"/>
+	<rect id="42" class="1-27 1-30" x="159" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 432.6895 39.3121)" class="st3" width="75.5" height="7.5"/>
+	<!--BREAK-->
+	<rect id="43" class="1-33 1-32" x="169" y="344.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 568.4441 128.6463)" class="st3" width="101.8" height="7.5"/>
+	<rect id="44" class="1-59 1-58" x="449.4" y="343.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 847.5015 -153.0437)" class="st3" width="101.8" height="7.5"/>
+	<rect id="45" class="1-64 1-63" x="473.7" y="343.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 871.8532 -177.3955)" class="st3" width="101.8" height="7.5"/>
+	<rect id="46" class="1-70 1-69" x="494.8" y="343.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 892.9579 -198.5001)" class="st3" width="101.8" height="7.5"/>
+	<rect id="47" class="1-76 1-75" x="519.2" y="343.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 917.3096 -222.8518)" class="st3" width="101.8" height="7.5"/>
+	<rect id="48" class="1-81 1-82" x="550.3" y="350.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 948.4093 -240.4555)" class="st3" width="88.3" height="7.5"/>
+	<rect id="49" class="1-88 1-87" x="567.9" y="343.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 966.013 -271.5552)" class="st3" width="101.8" height="7.5"/>
+	<!--BREAK-->
+	<!-- Shelf 98/94 missing? -->
+	<rect id="50" class="1-102 1-103" x="574.1" y="491.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1114.4807 -123.0874)" class="st3" width="89.4" height="7.5"/>
+	<rect id="51" class="1-93 1-96"   x="567.2" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1224.4111 -13.157)" class="st3" width="103.2" height="7.5"/>
+	<rect id="52" class="1-101 1-104" x="547.7" y="595.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1191.9148 6.3408)" class="st3" width="90.3" height="7.5"/>
+	<rect id="53" class="1-109 1-112" x="518.5" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1175.7078 35.5464)" class="st3" width="103.2" height="7.5"/>
+	<rect id="54" class="1-117 1-120" x="495.7" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1153.0015 58.2527)" class="st3" width="103.2" height="7.5"/>
+	<rect id="55" class="1-125 1-128" x="471.4" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1128.6497 82.6044)" class="st3" width="103.2" height="7.5"/>
+	<rect id="56" class="1-133 1-136" x="448.6" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1105.8997 105.3544)" class="st3" width="103.2" height="7.5"/>
+	<rect id="57" class="1-140 1-143" x="430.8" y="595.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1075.0924 123.1632)" class="st3" width="90.3" height="7.5"/>
+	<rect id="58" class="1-146 1-149" x="401.6" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1058.8854 152.3688)" class="st3" width="103.2" height="7.5"/>
+	<rect id="59" class="1-152 1-155" x="378.8" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1036.0917 175.1625)" class="st3" width="103.2" height="7.5"/>
+	<rect id="60" class="1-158 1-161" x="354.5" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1011.7399 199.5142)" class="st3" width="103.2" height="7.5"/>
+	<rect id="61" class="1-165 1-168" x="331.7" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 988.9462 222.3079)" class="st3" width="103.2" height="7.5"/>
+	<rect id="62" class="1-173 1-176" x="316.5" y="595.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 960.774 237.4815)" class="st3" width="90.3" height="7.5"/>
+	<rect id="63" class="Juvenile" x="284.5" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 941.8008 269.4533)" class="st3" width="103.2" height="7.5"/>
+	<rect id="64" class="Juvenile/Video" x="261.6" y="601.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 918.8528 292.4013)" class="st3" width="103.2" height="7.5"/>
+	<!--BREAK end of row 5 -->
+	<rect id="65" class="1-92 1-97" x="573.7" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1339.3954 101.8271)" class="st3" width="90.3" height="7.5"/>
+	<rect id="66" class="1-91 1-98" x="590.2" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1442.5963 205.0282)" class="st3" width="57.1" height="7.5"/>
+	<rect id="67" class="1-99 1-106"  x="562.6" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1414.9539 232.6707)" class="st3" width="57.1" height="7.5"/>
+	<rect id="68" class="1-107 1-114" x="541.5" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1393.8929 253.7316)" class="st3" width="57.1" height="7.5"/>
+	<rect id="69" class="1-115 1-122" x="518.8" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1371.1866 276.4379)" class="st3" width="57.1" height="7.5"/>
+	<rect id="70" class="1-123 1-130" x="494.5" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1346.835 300.7896)" class="st3" width="57.1" height="7.5"/>
+	<rect id="71" class="1-131 1-138" x="471.7" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1324.085 323.5396)" class="st3" width="57.1" height="7.5"/>
+	<rect id="72" class="1-163 1-170" x="354.8" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1207.1315 440.4931)" class="st3" width="57.1" height="7.5"/>
+	<rect class="1-171 1-178" x="333.1" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1185.4585 462.166)" class="st3" width="57.1" height="7.5"/>
+	<rect class="1-179 Juvenile" x="307.6" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1159.986 487.6385)" class="st3" width="57.1" height="7.5"/>
+	<rect class="Juvenile" x="284.7" y="820" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1137.038 510.5865)" class="st3" width="57.1" height="7.5"/>
+	<!--BREAK end of bottom most row-->
+	<rect class="1-100 1-105" x="547.7" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1313.3982 127.8242)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-108 1-113" x="525" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1290.6919 150.5305)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-116 1-121" x="502.2" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1267.9856 173.2369)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-124 1-129" x="477.9" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1243.6339 197.5886)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-132 1-137" x="455.1" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1220.8839 220.3386)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-139 1-144" x="430.8" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1196.5758 244.6466)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-145 1-150" x="408.1" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1173.8695 267.3529)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-151 1-156" x="385.3" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1151.0758 290.1467)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-157 1-162" x="361" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1126.7241 314.4984)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-164 1-169" x="338.2" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1103.9304 337.2921)" class="st3" width="90.3" height="7.5"/>
+	<rect class="1-172 1-177" x="316.5" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1082.2576 358.965)" class="st3" width="90.3" height="7.5"/>
+	<rect class="Juvenile" x="291" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1056.7849 384.4375)" class="st3" width="90.3" height="7.5"/>
+	<rect class="Juvenile/video" x="268.1" y="716.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1033.8369 407.3855)" class="st3" width="90.3" height="7.5"/>
+	<!--BREAK end of row 6 -->
+	<rect class="1-111 1-110" x="557.7" y="484" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1082.1605 -106.7043)" class="st3" width="73.5" height="7.5"/>
+	<rect class="1-118 1-119" x="526.4" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1064.7587 -75.4027)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-126 1-127" x="503.7" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1042.0522 -52.6964)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-134 1-135" x="479.3" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 1017.7006 -28.3447)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-141 1-142" x="456.6" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 994.9506 -5.5947)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-147 1-148" x="440.8" y="484" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 965.2507 10.2055)" class="st3" width="73.5" height="7.5"/>
+	<rect class="1-153 1-154"  x="409.5" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 947.8488 41.507)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1- 1-00"  x="386.8" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 925.1425 64.2134)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-159 1-160" x="362.4" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 900.7908 88.5651)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-167 1-166"  x="339.6" y="490.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 877.9971 111.3588)" class="st3" width="87.4" height="7.5"/>
+	<rect class="Juvenile"  x="306.1" y="504.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 844.4054 173.0248)" class="st3" width="59.3" height="7.5"/>
+	<rect class="Juvenile/video" x="282.5" y="504.9" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 820.8327 196.5975)" class="st3" width="59.3" height="7.5"/>
+	<rect class="1-174 1-175"  x="324.8" y="483.1" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 847.5421 126.229)" class="st3" width="71.8" height="7.5"/>
+	<rect class="1-28 1-29"  x="145.8" y="344.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 545.2339 151.8565)" class="st3" width="101.8" height="7.5"/>
+	<rect class="1-24 1-25" x="122.6" y="344.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 522.0237 175.0667)" class="st3" width="101.8" height="7.5"/>
+	<rect class="1-20 1-21"  x="99.6" y="344.8" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 499.0757 198.0147)" class="st3" width="101.8" height="7.5"/>
+	<rect class="1-17 1-16" x="83.2" y="337.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 468.2427 214.4814)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-12 1-13" x="60.7" y="337.6" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 445.7344 236.9897)" class="st3" width="87.4" height="7.5"/>
+	<rect class="1-6 1-7" x="32.8" y="317.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 378.2826 264.8392)" class="st3" width="47.8" height="8.3"/>
+	<rect class="1-3 1-2"  x="22.6" y="327.5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 368.1173 294.776)" class="st3" width="28" height="7.9"/>
+	<rect class="1-23 1-26" x="137.2" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 410.8831 61.1186)" class="st3" width="75.5" height="7.5"/>
+	<rect class="1-19 1-22" x="112.8" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 386.5313 85.4703)" class="st3" width="75.5" height="7.5"/>
+	<rect class="1-15 1-18" x="89.1" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 362.8815 109.1201)" class="st3" width="75.5" height="7.5"/>
+	<rect class="1-11 1-14" x="65.5" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 339.2316 132.77)" class="st3" width="75.5" height="7.5"/>
+	<rect class="1-9 1-10" x="42.4" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 316.1525 155.8491)" class="st3" width="75.5" height="7.5"/>
+	<rect class="1-5 1-8" x="18.6" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 292.3716 179.6301)" class="st3" width="75.5" height="7.5"/>
+	<rect class="1-1 1-4" x="-5" y="232.2" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 268.7217 203.2799)" class="st3" width="75.5" height="7.5"/>
+	</g>
+	<g id="text">
+	<rect x="7.8" y="12.4" class="st4" width="701.9" height="48.3"/>
+	<text transform="matrix(1 0 0 1 236.4349 48.3583)" class="st5 st6">Concourse</text>
+	<rect x="173.5" y="732.7" class="st4" width="121.8" height="52"/>
+	<text transform="matrix(1 0 0 1 198.4135 750.0033)"><tspan x="0" y="0" class="st7 st8">Create</tspan><tspan x="2" y="24" class="st7 st8">Space</tspan></text>
+	<rect x="239.3" y="351.5" class="st4" width="121.8" height="52"/>
+	<text transform="matrix(1 0 0 1 269.4931 368.7356)" class="st7 st8">Stairs</text>
+	<rect x="24" y="103.9" class="st4" width="195.3" height="61.5"/>
+	<text transform="matrix(1 0 0 1 48.2807 121.1792)"><tspan x="0" y="0" class="st7 st8">Faculty / Staff</tspan><tspan x="9.3" y="24" class="st7 st8">Quiet Room</tspan></text>
+	</g>
+	</g>
+	</switch>
+	</svg>
+    </div>
+</head>
+
+<body onload="pullHash(); color();">
+    <script type="text/javascript">
+        //mouseover popup function
+        function pullHash(){
+        	if(window.location.hash.length > 6){
+        		document.getElementById("textbox1").value = window.location.hash.replace("#",' ')
+        			getText();
+        	}
+        }
+
+        function getText() {
+            //read text from URL
+			
+            var request = new XMLHttpRequest();
+            request.open('GET', 'ShelfListSheet1.csv');
+
+            request.onreadystatechange = function() {
+                if (this.readyState == this.DONE) {
+                    console.log("state change");
+                    var rawData = request.responseText;
+
+                    //Normalize data
+                    rawData = rawData.toUpperCase(); 
+                    rawData = rawData.replace(' ','')
+
+
+                    console.log("started");
+                    //Array of shelfs, [i][0] = start call number, [i][1] = end call number, [i][2] = floor, [i][3] = shelf number
+                    var items = [
+                        []
+                    ];
+                    var rawDataArr = rawData.split('\n');
+                    for (var i = 1; i < rawDataArr.length; i++) {
+                        var temp = rawDataArr[i].split(',');
+                        if (temp[1] != 'MISSING') {
+                            if (temp[0] != undefined && temp[1] != undefined && temp[2] != undefined && temp[3] != undefined) {
+                                items.push([temp[1].trim(), temp[2].trim(), temp[3].trim(), temp[0].trim()]);
+                            }
+                        }
+                    }
+                    items.splice(0, 1); //keep or remove?
+                    for (var i = 0; i < rawDataArr.length; i++) {
+                        console.log(rawDataArr[i]);
+                    }
+                    for (var i = 0; i < items.length; i++) {
+                        console.log(items[i]);
+                    }
+                    //Format of a call number: [Section][Subsection][Number]['.'][String]
+                    //Object to store shelf attributes for sorting
+                    function shelf(s1, ss1, n1, str1, s2, ss2, n2, str2, flr, mapno) {
+                        this.section1 = s1;
+                        this.subsection1 = ss1;
+                        this.number1 = n1;
+                        this.string1 = str1;
+                        this.section2 = s2;
+                        this.subsection2 = ss2;
+                        this.number2 = n2;
+                        this.string2 = str2;
+                        this.floor = flr;
+                        this.mapnumber = mapno;
+                    }
+                    var shelves = [];
+                    //Parse raw text items array into shelf objects
+                    for (var i = 0; i < items.length; i++) { 
+                        shelves.push(new shelf(items[i][0].charAt(0), "", "", "", items[i][1].charAt(0), "", "", "", items[i][2], items[i][3]));
+                        if (isNaN(items[i][0].charAt(1))) {
+                            shelves[i].subsection1 = items[i][0].charAt(1);
+                        }
+                        if (isNaN(items[i][1].charAt(1))) {
+                            shelves[i].subsection2 = items[i][1].charAt(1);
+                        }
+                        //Read first line of call number up to '.'
+                        for (var x = 0; x < items[i][0].length; x++) {
+                            if (isNaN(items[i][0].charAt(x)) == false && items[i][0].charAt(x) != '.') {
+                                shelves[i].number1 = shelves[i].number1 + items[i][0].charAt(x);
+                            }
+                            //Once '.' is found, continue iterating but adding to 'string' attribute, then break
+                            if (items[i][0].charAt(x) == '.') {
+                                for (var y = x + 1; y < items[i][0].length; y++) {
+                                    shelves[i].string1 = shelves[i].string1 + items[i][0].charAt(y);
+                                }
+                                break;
+                            }
+                        }
+                        //same as above but for end value
+                        for (var x = 0; x < items[i][1].length; x++) {
+                            if (isNaN(items[i][1].charAt(x)) == false && items[i][1].charAt(x) != '.') {
+                                shelves[i].number2 = shelves[i].number2 + items[i][1].charAt(x);
+                            }
+                            if (items[i][1].charAt(x) == '.') {
+                                for (var y = x + 1; y < items[i][1].length; y++) {
+                                    shelves[i].string2 = shelves[i].string2 + items[i][1].charAt(y);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    var str = document.getElementById("textbox1").value;
+                    str = str.toUpperCase();
+                    str = str.replace('Stacks:', '');
+                    str = str.trim();
+                    //Declaring input call number, parsing to object for useful bits
+                    var callno = {
+                        section: str.charAt(0),
+                        subsection: "",
+                        number: "",
+                        string: ""
+                    };
+                    if (isNaN(str.charAt(1))) {
+                        callno.subsection = str.charAt(1);
+                    }
+                    for (var i = 1; i < str.length; i++) {
+                        if (isNaN(str.charAt(i)) == false && str.charAt(i) != '.') {
+                            callno.number = callno.number + str.charAt(i);
+                        }
+                        if (str.charAt(i) == '.') {
+                            for (var x = i + 1; x < str.length; x++) {
+                                callno.string = callno.string + str.charAt(x);
+                            }
+                            break;
+                        }
+                    }
+                    var index;
+                    for (var i = 0; i < shelves.length; i++) {
+                        //If strictly between start and end subsection, match found
+                        if ((callno.section + callno.subsection) > (shelves[i].section1 + shelves[i].subsection1) && (callno.section + callno.subsection) < (shelves[i].section2 + shelves[i].subsection2)) {
+                            index = shelves[i].floor + "-" + shelves[i].mapnumber;
+                            console.log("INDEX ASSIGNED - Callnumber " + str + " section is STRICTLY in the range of shelf " + i + " RANGE: " + (shelves[i].section1 + shelves[i].subsection1) + " - " + callno.section + callno.subsection + " - " + (shelves[i].section2 + shelves[i].subsection2));
+                        }
+                        //If contained within start section
+                        else if ((callno.section + callno.subsection) == (shelves[i].section1 + shelves[i].subsection1)) {
+                            //If contained in start section and further in number
+                            if ((parseInt(callno.number, 10) > parseInt(shelves[i].number1, 10))) {
+                                index = shelves[i].floor + "-" + shelves[i].mapnumber;
+                                console.log("INDEX ASSIGNED - Callnumber " + callno.number + " number is STRICTLY in the range of shelf " + i + " RANGE: " + (shelves[i].number1) + "-" + (shelves[i].number2));
+                            }
+                            //If equal to start section and start number, assign if further in string
+                            else if ((parseInt(callno.number, 10) == parseInt(shelves[i].number1, 10))) {
+                                if (callno.string >= shelves[i].string1) {
+                                    console.log("INDEX ASSIGNED - Callnumber " + callno.string + " string is STRICTLY OR EQUAL in the range of shelf " + i + " RANGE: " + (shelves[i].string1) + "-" + (shelves[i].string2));
+                                    index = shelves[i].floor + "-" + shelves[i].mapnumber;
+                                }
+                            }
+
+                        }
+                        //If contained within end section
+                        else if ((callno.section + callno.subsection) == (shelves[i].section2 + shelves[i].subsection2)) {
+                            //if contained in end section and less far in number
+                            if ((parseInt(callno.number, 10) < parseInt(shelves[i].number2, 10))) {
+                                index = shelves[i].floor + "-" + shelves[i].mapnumber;
+                                console.log("INDEX ASSIGNED - Callnumber " + callno.number + " number is STRICTLY in the range of shelf " + i + " RANGE: " + (shelves[i].number1) + "-" + (shelves[i].number2));
+                            }
+                            //if equal to end section and number, assign if less far in string
+                            else if ((parseInt(callno.number, 10) == parseInt(shelves[i].number2, 10))) {
+                                if (callno.string <= shelves[i].string1) {
+                                    console.log("INDEX ASSIGNED - Callnumber " + callno.string + " string is STRICTLY OR EQUAL in the range of shelf " + i + " RANGE: " + (shelves[i].string1) + "-" + (shelves[i].string2));
+                                    index = shelves[i].floor + "-" + shelves[i].mapnumber;
+                                }
+                            }
+                        }
+                    }
+                    console.log(index);
+                    //get shelf in format of [floor]-[number]
+                    try{
+                    var s = document.getElementsByClassName(index.toString())[0];
+                    s.setAttribute("fill", "#EC4D39");
+                    s.setAttribute("stroke", "blue");
+                	}
+                	catch(err){
+                		document.getElementById("modalHeader").innerHTML = "Sorry!"
+                		document.getElementById("modalParagraph").innerHTML = "Your book wasn't found. Sorry.";
+                     	document.getElementById("modalButton").click();                     	     
+                	}
+					
+					var x = document.getElementById("textbox1").value;
+					document.getElementById("feedback").style.display = "block";
+					document.getElementById("callno").value = x; 
+					
+                    var indexFloor;
+                    switch(index.charAt(0)){
+                    	case '1':
+                    		indexFloor="Concourse";
+                    		showConcourse();
+                    		break;
+                    	case '0':
+                    		indexFloor="Main floor";
+                    		showMain();
+                    		break;
+                    	case '2':
+                    		indexFloor="Ground floor";
+                    		showGround();
+                    		break;
+                    	default:
+                    		break;
+                    }
+					
+					
+                    if(index != undefined){
+                     	document.getElementById("modalParagraph").innerHTML = "Your book was found on shelf " + index.split('-')[1] + " on " + indexFloor;                   	
+                    	document.getElementById("modalButton").click();
+                    }
+					
+                    
+                    $('#bookFoundModal').on('show.bs.modal', function(e) {
+    					
+					});       
+
+                }
+            }
+
+            request.send();
+        }
+
+        function showAbout() {
+            document.getElementById("mainfloormap").style.display = "none";
+            document.getElementById("groundfloormap").style.display = "none";
+            document.getElementById("concoursemap").style.display = "none";
+            document.getElementById("about").style.display = "block";
+        }
+
+        function showMain() {
+            document.getElementById("mainfloormap").style.display = "block";
+            document.getElementById("groundfloormap").style.display = "none";
+            document.getElementById("concoursemap").style.display = "none";
+            document.getElementById("about").style.display = "none";
+        }
+
+        function showGround() {
+            document.getElementById("groundfloormap").style.display = "block";
+            document.getElementById("mainfloormap").style.display = "none";
+            document.getElementById("concoursemap").style.display = "none";
+            document.getElementById("about").style.display = "none";
+
+        }
+
+        function showConcourse() {
+            document.getElementById("mainfloormap").style.display = "none";
+            document.getElementById("groundfloormap").style.display = "none";
+            document.getElementById("concoursemap").style.display = "block";
+            document.getElementById("about").style.display = "none";
+        }
+
+        function color() {
+            console.log("started coloring shelves");
+            var shelvesToColor = document.getElementsByClassName("st3");
+            console.log(shelvesToColor[5]);
+            for (var i = 0; i < shelvesToColor.length; i++){
+            	if(shelvesToColor[i]!=undefined){
+                	shelves[i].setAttribute("fill", "#AAAAAA")
+                }
+            }
+        }
+		
+    </script>
+	
+    <div id="about">
+        <b><h1>STL Library Call Number Locator Tool</h1></b>
+        <h3>How to use</h3>
+		<ul>
+			<li>Copy Stacks call number from Library Catalog<img src="Example.png" width="100%" style="padding-right:12px;"></li>	
+			<li>Paste and Submit </li>
+			<li>If a match is found, the shelf will be highlighted red </li>
+			<br>
+			Questions? Bugs? Contact me at <a href="mailto:giordana3@hawkmail.newpaltz.edu?Subject=Library Book Finder">giordana3@hawkmail.newpaltz.edu</a>
+			<br>
+			<br>
+			Developed by Anthony Giordano, Brenden Wrafter, Darrell Maxwell for the Sojourner Truth Library at SUNY New Paltz Android/iOS app
+			<br>
+			Graphics by Kelly McInerney
+		<ul>
+    </div>
+	
+	<div id="id01" class="loginmodal">
+  
+		<form class="loginmodal-content animate" action="Admin/login.php" method="post">
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('id01').style.display='none'" class="closebtn" title="Close Modal">&times;</span>
+				<img src="SUNY Logo.png" alt="SUNY Logo" class="avatar">
+			</div>
+
+			<div class="container">
+				<label>Username:</label><input type = "text" name = "Username" value = "" required><br>
+				<br><label>Password:</label><input type = "password" name = "Password" value = "" required><br>
+				<br><input id = "submit" type = "submit" name = "submit" value = "Login">
+				
+				<input type="checkbox" checked="checked"> Remember me
+			</div>
+
+			<div class="container" style="background-color:#f1f1f1">
+				<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+				<span class="psw">Forgot <a href="#">password?</a></span>
+			</div>
+		</form>
+	</div>
+
+	<script>
+	// Get the modal
+	var modal = document.getElementById('id01');
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+			}
+	}
+	</script>
+
+
+
+</body>
+
+</html>
